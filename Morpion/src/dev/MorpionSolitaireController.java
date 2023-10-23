@@ -25,31 +25,28 @@ public class MorpionSolitaireController {
 	private int[] getCoordinatesFromUser() {
 		int x = 0;
 		int y = 0;
-		try (Scanner scanner = new Scanner(System.in)) {
-			
-			//while (true) {
-			System.out.print("Enter the x-coordinate: ");
-			if(scanner.hasNextInt()) {
-				System.out.println("X");
-				x = scanner.nextInt();
-				x = x -1;
-			}
-			System.out.print("Enter the y-coordinate: ");
-			if(scanner.hasNextInt()) {
-				System.out.println("Y");
-				y = scanner.nextInt();
-				y = y -1;
-			}
-			System.out.println(x);
-			System.out.println(y);
-			if (model.getGrid().isValidMove(x, y)) {
-				System.out.println("Move Valid ?");
-				return new int[] { x, y };
-			} else {
-				System.out.println("Invalid move. Try again.");
-			}
-				//}
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter the x-coordinate: ");
+		if(scanner.hasNextInt()) {
+			System.out.println("X");
+			x = scanner.nextInt();
+			x = x -1;
 		}
-		return new int[] { x, y };
+		System.out.print("Enter the y-coordinate: ");
+		if(scanner.hasNextInt()) {
+			System.out.println("Y");
+			y = scanner.nextInt();
+			y = y -1;
+		}
+		System.out.println(x);
+		System.out.println(y);
+		scanner.nextLine();
+		if (model.getGrid().isValidMove(x, y)) {
+			System.out.println("Move Valid ?");
+			return new int[] { x, y };
+		}
+		else {
+			return null;
+		}
 	}
 }

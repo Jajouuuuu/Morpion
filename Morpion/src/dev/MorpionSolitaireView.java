@@ -20,7 +20,8 @@ public class MorpionSolitaireView {
 				case UNOCCUPIED:
 					System.out.print(".");
 					break;
-				default:
+				case LINE:
+					System.out.print(grid.getPoint(x, y).getMoveNumber());
 					break;
 
 				}
