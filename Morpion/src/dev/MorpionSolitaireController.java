@@ -27,16 +27,16 @@ public class MorpionSolitaireController {
 		int y = 0;
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Enter the x-coordinate: ");
-		if(scanner.hasNextInt()) {
+		if (scanner.hasNextInt()) {
 			System.out.println("X");
 			x = scanner.nextInt();
-			x = x -1;
+			x = x - 1;
 		}
 		System.out.print("Enter the y-coordinate: ");
-		if(scanner.hasNextInt()) {
+		if (scanner.hasNextInt()) {
 			System.out.println("Y");
 			y = scanner.nextInt();
-			y = y -1;
+			y = y - 1;
 		}
 		System.out.println(x);
 		System.out.println(y);
@@ -44,8 +44,7 @@ public class MorpionSolitaireController {
 		if (model.getGrid().isValidMove(x, y)) {
 			System.out.println("Move Valid ?");
 			return new int[] { x, y };
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

@@ -1,8 +1,6 @@
 package dev;
 
 public enum PointState {
-    UNOCCUPIED,
-    OCCUPIED,
-    LINE
-    
+	UNOCCUPIED, OCCUPIED, LINE
+
 }

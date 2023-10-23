@@ -99,7 +99,6 @@ public class Grid {
 		}
 	}
 
-
 	public int getWidth() {
 		return width;
 	}
@@ -114,13 +113,14 @@ public class Grid {
 
 	public boolean isValidMove(int x, int y) {
 		Point point = new Point(x, y);
-		if (isValidHorizontalMove(x, y, point) || isValidVerticalMove(x,y) || isValidUpRightDiagonalMove(x,y) || isValidDownRightDiagonalMove(x,y)) {
+		if (isValidHorizontalMove(x, y, point) || isValidVerticalMove(x, y) || isValidUpRightDiagonalMove(x, y)
+				|| isValidDownRightDiagonalMove(x, y)) {
 			System.out.println("True ????");
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean isValidHorizontalMove(int x, int y, Point point) {
 		if (point.getState() != PointState.UNOCCUPIED) {
 			return false;
@@ -129,22 +129,26 @@ public class Grid {
 		for (int dx = -4; dx <= 4; dx++) {
 			int nx = x + dx;
 			if (nx > 0 && nx < this.width && nx != x) {
-				if(points[nx][y].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
-					adjacentOccupiedCount ++;
+				if (points[nx][y].getState() == PointState.OCCUPIED) { /*
+																		 * I don't get "line" point state. == Unocc
+																		 * could be changed to == Occ.
+																		 */
+					adjacentOccupiedCount++;
 					System.out.println("coucou");
 					if (adjacentOccupiedCount == 4) {
 						return true;
 					}
-				}
-				else {
-					/* there is an interruption in the continuity of occupied points, so reset to 0 */
+				} else {
+					/*
+					 * there is an interruption in the continuity of occupied points, so reset to 0
+					 */
 					adjacentOccupiedCount = 0;
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean isValidVerticalMove(int x, int y) {
 		Point point = points[x][y];
 		if (point.getState() != PointState.UNOCCUPIED) {
@@ -154,21 +158,23 @@ public class Grid {
 		for (int dy = -4; dy <= 4; dy++) {
 			int ny = y + dy;
 			if (ny >= 0 && ny < height) {
-				if (points[x][ny].getState() != PointState.UNOCCUPIED || dy == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+				if (points[x][ny].getState() != PointState.UNOCCUPIED
+						|| dy == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
 					}
-				}
-				else {
-					/* there is an interruption in the continuity of occupied points, so reset to 0 */
+				} else {
+					/*
+					 * there is an interruption in the continuity of occupied points, so reset to 0
+					 */
 					adjacentOccupiedCount = 0;
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean isValidUpRightDiagonalMove(int x, int y) {
 		Point point = points[x][y];
 		if (point.getState() != PointState.UNOCCUPIED) {
@@ -179,21 +185,23 @@ public class Grid {
 			int nx = x + dc;
 			int ny = y + dc;
 			if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
-				if (points[nx][ny].getState() != PointState.UNOCCUPIED  || dc == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+				if (points[nx][ny].getState() != PointState.UNOCCUPIED
+						|| dc == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
 					}
-				}
-				else {
-					/* there is an interruption in the continuity of occupied points, so reset to 0 */
+				} else {
+					/*
+					 * there is an interruption in the continuity of occupied points, so reset to 0
+					 */
 					adjacentOccupiedCount = 0;
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean isValidDownRightDiagonalMove(int x, int y) {
 		Point point = points[x][y];
 		if (point.getState() != PointState.UNOCCUPIED) {
@@ -204,22 +212,22 @@ public class Grid {
 			int nx = x - dc;
 			int ny = y + dc;
 			if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
-				if (points[nx][ny].getState() != PointState.UNOCCUPIED  || dc == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+				if (points[nx][ny].getState() != PointState.UNOCCUPIED
+						|| dc == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
 					}
-				}
-				else {
-					/* there is an interruption in the continuity of occupied points, so reset to 0 */
+				} else {
+					/*
+					 * there is an interruption in the continuity of occupied points, so reset to 0
+					 */
 					adjacentOccupiedCount = 0;
 				}
 			}
 		}
 		return false;
 	}
-		
-		
 
 	public void placePoint(int x, int y, int moveNumber) {
 		Point point = points[x][y];

@@ -16,11 +16,13 @@ public class Line {
 		points.add(startPoint);
 		switch (direction) {
 		case VERTICAL:
-			for (int y = startPoint.getY() + 1; y < startPoint.getY() + 5; y++) {		/* Pourquoi +1 ? */
-				points.add(new Point(startPoint.getX(), y));		
-				/* Ca fait quoi en fait ? Ou cherche à faire quoi ? 
-				 * Il faut pas une condition sur est occupé avant de l'ajouter à points ?
-				 * Ou sinon utuliser ce que j'ai écrit dans isMoveXXXValid pour savir quelle direction a été donnéee ? */
+			for (int y = startPoint.getY() + 1; y < startPoint.getY() + 5; y++) { /* Pourquoi +1 ? */
+				points.add(new Point(startPoint.getX(), y));
+				/*
+				 * Ca fait quoi en fait ? Ou cherche à faire quoi ? Il faut pas une condition
+				 * sur est occupé avant de l'ajouter à points ? Ou sinon utuliser ce que j'ai
+				 * écrit dans isMoveXXXValid pour savir quelle direction a été donnéee ?
+				 */
 			}
 			break;
 		case HORIZONTAL:
@@ -29,12 +31,14 @@ public class Line {
 			}
 			break;
 		case DIAGONAL_UP_RIGHT:
-			for (int x = startPoint.getX() + 1, y = startPoint.getY() + 1; x < startPoint.getX() + 5 && y < startPoint.getY() + 5; x++, y++) {
+			for (int x = startPoint.getX() + 1, y = startPoint.getY() + 1; x < startPoint.getX() + 5
+					&& y < startPoint.getY() + 5; x++, y++) {
 				points.add(new Point(x, y));
 			}
 			break;
 		case DIAGONAL_DOWN_RIGHT:
-			for (int x = startPoint.getX() + 1, y = startPoint.getY() - 1; x < startPoint.getX() + 5 && y >= startPoint.getY() - 4; x++, y--) {
+			for (int x = startPoint.getX() + 1, y = startPoint.getY() - 1; x < startPoint.getX() + 5
+					&& y >= startPoint.getY() - 4; x++, y--) {
 				points.add(new Point(x, y));
 			}
 			break;
@@ -54,6 +58,6 @@ public class Line {
 	}
 
 	public boolean isComplete() {
-		return points.size() == 5;		
+		return points.size() == 5;
 	}
 }
