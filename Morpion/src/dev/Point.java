@@ -4,6 +4,7 @@ public class Point {
 	private int x;
 	private int y;
 	private PointState state;
+	private Line[] inLines;
 	private int moveNumber;
 
 	public Point() {
@@ -35,6 +36,14 @@ public class Point {
 	public void setState(PointState state) {
 		this.state = state;
 	}
+	
+	public Line[] getInLines() {
+		return inLines;
+	}
+
+	public void setInLines(Line[] inLines) {
+		this.inLines = inLines;
+	}
 
 	public int getMoveNumber() {
 		return moveNumber;
@@ -56,4 +65,6 @@ public class Point {
 			return "";
 		}
 	}
+
+	
 }

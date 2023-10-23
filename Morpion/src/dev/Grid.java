@@ -113,8 +113,8 @@ public class Grid {
 	}
 
 	public boolean isValidMove(int x, int y) {
-		Point point = new Point(x, y);
-		if (isValidHorizontalMove(x, y, point) || isValidVerticalMove(x,y) || isValidUpRightDiagonalMove(x,y) || isValidDownRightDiagonalMove(x,y)) {
+		Point point = new Point(x, y);		
+		if (isValidHorizontalMove(x, y, point) || isValidVerticalMove(x,y, point) || isValidUpRightDiagonalMove(x,y, point) || isValidDownRightDiagonalMove(x,y, point)) {
 			System.out.println("True ????");
 			return true;
 		}
@@ -128,10 +128,9 @@ public class Grid {
 		int adjacentOccupiedCount = 0;
 		for (int dx = -4; dx <= 4; dx++) {
 			int nx = x + dx;
-			if (nx > 0 && nx < this.width && nx != x) {
-				if(points[nx][y].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+			if (nx >= 0 && nx < this.width && nx != x) {
+				if (points[nx][y].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
 					adjacentOccupiedCount ++;
-					System.out.println("coucou");
 					if (adjacentOccupiedCount == 4) {
 						return true;
 					}
@@ -145,16 +144,15 @@ public class Grid {
 		return false;
 	}
 	
-	public boolean isValidVerticalMove(int x, int y) {
-		Point point = points[x][y];
+	public boolean isValidVerticalMove(int x, int y, Point point) {
 		if (point.getState() != PointState.UNOCCUPIED) {
 			return false;
 		}
 		int adjacentOccupiedCount = 0;
 		for (int dy = -4; dy <= 4; dy++) {
 			int ny = y + dy;
-			if (ny >= 0 && ny < height) {
-				if (points[x][ny].getState() != PointState.UNOCCUPIED || dy == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+			if (ny >= 0 && ny < height && ny != y) {
+				if (points[x][ny].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
@@ -169,8 +167,7 @@ public class Grid {
 		return false;
 	}
 	
-	public boolean isValidUpRightDiagonalMove(int x, int y) {
-		Point point = points[x][y];
+	public boolean isValidUpRightDiagonalMove(int x, int y, Point point) {
 		if (point.getState() != PointState.UNOCCUPIED) {
 			return false;
 		}
@@ -178,8 +175,8 @@ public class Grid {
 		for (int dc = -4; dc <= 4; dc++) {
 			int nx = x + dc;
 			int ny = y + dc;
-			if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
-				if (points[nx][ny].getState() != PointState.UNOCCUPIED  || dc == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+			if (nx >= 0 && nx < width && ny >= 0 && ny < height && nx != x && ny != y) {
+				if (points[nx][ny].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
@@ -194,8 +191,7 @@ public class Grid {
 		return false;
 	}
 	
-	public boolean isValidDownRightDiagonalMove(int x, int y) {
-		Point point = points[x][y];
+	public boolean isValidDownRightDiagonalMove(int x, int y, Point point) {
 		if (point.getState() != PointState.UNOCCUPIED) {
 			return false;
 		}
@@ -203,8 +199,8 @@ public class Grid {
 		for (int dc = -4; dc <= 4; dc++) {
 			int nx = x - dc;
 			int ny = y + dc;
-			if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
-				if (points[nx][ny].getState() != PointState.UNOCCUPIED  || dc == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+			if (nx >= 0 && nx < width && ny >= 0 && ny < height && nx != x && ny != y) {
+				if (points[nx][ny].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
