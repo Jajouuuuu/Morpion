@@ -114,7 +114,6 @@ public class Grid {
 
 	public boolean isValidMove(int x, int y) {
 		Point point = new Point(x, y);
-		Line line = new Line;
 		if (isValidHorizontalMove(x, y, point) || isValidVerticalMove(x,y, point) || isValidUpRightDiagonalMove(x,y, point) || isValidDownRightDiagonalMove(x,y, point)) {
 			System.out.println("True ????");
 			return true;
@@ -122,7 +121,7 @@ public class Grid {
 		return false;
 	}
 	
-	public boolean isValidHorizontalMove(int x, int y, Point point, Line line) {
+	public boolean isValidHorizontalMove(int x, int y, Point point) {
 		if (point.getState() != PointState.UNOCCUPIED) {
 			return false;
 		}
@@ -132,9 +131,9 @@ public class Grid {
 			int nx = x + dx;
 			if (nx >= 0 && nx < this.width && nx != x) {
 				if (points[nx][y].getState() == PointState.OCCUPIED) { 
-					for (Line line : points[nx][y].getInLines()) {
-						if (line.getDirection() == LineDirection.HORIZONTAL && adjacentInSameLineCount == 1) continue ;
-						if (line.getDirection() == LineDirection.HORIZONTAL && adjacentInSameLineCount == 0) adjacentInSameLineCount ++;
+					for (LineDirection lineDirection : points[nx][y].getUsedInDirection()) {
+						if (lineDirection == LineDirection.HORIZONTAL && adjacentInSameLineCount == 1) continue ;
+						if (lineDirection == LineDirection.HORIZONTAL && adjacentInSameLineCount == 0) adjacentInSameLineCount ++;
 						else adjacentInSameLineCount = 0;
 					}
 					adjacentOccupiedCount ++;
