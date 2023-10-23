@@ -23,19 +23,33 @@ public class MorpionSolitaireController {
 	}
 
 	private int[] getCoordinatesFromUser() {
+		int x = 0;
+		int y = 0;
 		try (Scanner scanner = new Scanner(System.in)) {
-			int x, y;
-			while (true) {
-				System.out.print("Enter the x-coordinate: ");
+			
+			//while (true) {
+			System.out.print("Enter the x-coordinate: ");
+			if(scanner.hasNextInt()) {
+				System.out.println("X");
 				x = scanner.nextInt();
-				System.out.print("Enter the y-coordinate: ");
-				y = scanner.nextInt();
-				if (model.getGrid().isValidMove(x, y)) {
-					return new int[] { x, y };
-				} else {
-					System.out.println("Invalid move. Try again.");
-				}
+				x = x -1;
 			}
+			System.out.print("Enter the y-coordinate: ");
+			if(scanner.hasNextInt()) {
+				System.out.println("Y");
+				y = scanner.nextInt();
+				y = y -1;
+			}
+			System.out.println(x);
+			System.out.println(y);
+			if (model.getGrid().isValidMove(x, y)) {
+				System.out.println("Move Valid ?");
+				return new int[] { x, y };
+			} else {
+				System.out.println("Invalid move. Try again.");
+			}
+				//}
 		}
+		return new int[] { x, y };
 	}
 }
