@@ -4,7 +4,7 @@ public class Point {
 	private int x;
 	private int y;
 	private PointState state;
-	private Line[] inLines;
+	private LineDirection[] inLineDirection;
 	private int moveNumber;
 
 	public Point() {
@@ -37,12 +37,12 @@ public class Point {
 		this.state = state;
 	}
 	
-	public Line[] getInLines() {
-		return inLines;
+	public LineDirection[] getInLineDirection() {
+		return inLineDirection;
 	}
 
-	public void setInLines(Line[] inLines) {
-		this.inLines = inLines;
+	public void setInLineDirection(LineDirection[] inLineDirection) {
+		this.inLineDirection = inLineDirection;
 	}
 
 	public int getMoveNumber() {

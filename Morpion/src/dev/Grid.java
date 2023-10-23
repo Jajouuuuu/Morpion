@@ -113,7 +113,8 @@ public class Grid {
 	}
 
 	public boolean isValidMove(int x, int y) {
-		Point point = new Point(x, y);		
+		Point point = new Point(x, y);
+		Line line = new Line;
 		if (isValidHorizontalMove(x, y, point) || isValidVerticalMove(x,y, point) || isValidUpRightDiagonalMove(x,y, point) || isValidDownRightDiagonalMove(x,y, point)) {
 			System.out.println("True ????");
 			return true;
@@ -121,24 +122,25 @@ public class Grid {
 		return false;
 	}
 	
-	public boolean isValidHorizontalMove(int x, int y, Point point) {
+	public boolean isValidHorizontalMove(int x, int y, Point point, Line line) {
 		if (point.getState() != PointState.UNOCCUPIED) {
 			return false;
 		}
 		int adjacentOccupiedCount = 0;
+		int adjacentInSameLineCount = 0;
 		for (int dx = -4; dx <= 4; dx++) {
 			int nx = x + dx;
 			if (nx >= 0 && nx < this.width && nx != x) {
-				if (points[nx][y].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
-					adjacentOccupiedCount ++;
-					if (adjacentOccupiedCount == 4) {
-						return true;
+				if (points[nx][y].getState() == PointState.OCCUPIED) { 
+					for (Line line : points[nx][y].getInLines()) {
+						if (line.getDirection() == LineDirection.HORIZONTAL && adjacentInSameLineCount == 1) continue ;
+						if (line.getDirection() == LineDirection.HORIZONTAL && adjacentInSameLineCount == 0) adjacentInSameLineCount ++;
+						else adjacentInSameLineCount = 0;
 					}
+					adjacentOccupiedCount ++;
+					if (adjacentOccupiedCount == 4)	return true;
 				}
-				else {
-					/* there is an interruption in the continuity of occupied points, so reset to 0 */
-					adjacentOccupiedCount = 0;
-				}
+				else adjacentOccupiedCount = 0;		/* there is an interruption in the continuity of occupied points, so reset to 0 */
 			}
 		}
 		return false;
@@ -152,7 +154,7 @@ public class Grid {
 		for (int dy = -4; dy <= 4; dy++) {
 			int ny = y + dy;
 			if (ny >= 0 && ny < height && ny != y) {
-				if (points[x][ny].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+				if (points[x][ny].getState() == PointState.OCCUPIED) {
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
@@ -176,7 +178,7 @@ public class Grid {
 			int nx = x + dc;
 			int ny = y + dc;
 			if (nx >= 0 && nx < width && ny >= 0 && ny < height && nx != x && ny != y) {
-				if (points[nx][ny].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+				if (points[nx][ny].getState() == PointState.OCCUPIED) { 
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
@@ -200,7 +202,7 @@ public class Grid {
 			int nx = x - dc;
 			int ny = y + dc;
 			if (nx >= 0 && nx < width && ny >= 0 && ny < height && nx != x && ny != y) {
-				if (points[nx][ny].getState() == PointState.OCCUPIED) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+				if (points[nx][ny].getState() == PointState.OCCUPIED) { 
 					adjacentOccupiedCount++;
 					if (adjacentOccupiedCount == 4) {
 						return true;
@@ -221,6 +223,7 @@ public class Grid {
 		Point point = points[x][y];
 		point.setState(PointState.OCCUPIED);
 		point.setMoveNumber(moveNumber);
+		point.setInLines(null);
 		for (LineDirection direction : LineDirection.values()) {
 			Line line = new Line(point, direction);
 			if (line.isComplete()) {
