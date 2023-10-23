@@ -114,23 +114,110 @@ public class Grid {
 
 	public boolean isValidMove(int x, int y) {
 		Point point = points[x][y];
+		if (isValidHorizontalMove(x, y) || isValidVerticalMove(x,y) || isValidUpRightDiagonalMove(x,y) || isValidDownRightDiagonalMove(x,y)) {
+			return true;
+		}
+	}
+	
+	public boolean isValidHorizontalMove(int x, int y) {
+		Point point = points[x][y];
 		if (point.getState() != PointState.UNOCCUPIED) {
 			return false;
 		}
 		int adjacentOccupiedCount = 0;
-		for (int dx = -1; dx <= 1; dx++) {
-			for (int dy = -1; dy <= 1; dy++) {
-				int nx = x + dx;
-				int ny = y + dy;
-				if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
-					if (points[nx][ny].getState() == PointState.OCCUPIED) {
-						adjacentOccupiedCount++;
+		for (int dx = -4; dx <= 4; dx++) {
+			int nx = x + dx;
+			if (nx >= 0 && nx < width) {
+				if (points[nx][y].getState() != PointState.UNOCCUPIED || dx == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+					adjacentOccupiedCount++;
+					if (adjacentOccupiedCount == 4) {
+						return true;
 					}
+				}
+				if {
+					/* there is an interruption in the continuity of occupied points, so reset to 0 */
+					adjacentOccupiedCount = 0;
 				}
 			}
 		}
-		return adjacentOccupiedCount >= 4;
+		return false;
 	}
+	
+	public boolean isValidVerticalMove(int x, int y) {
+		Point point = points[x][y];
+		if (point.getState() != PointState.UNOCCUPIED) {
+			return false;
+		}
+		int adjacentOccupiedCount = 0;
+		for (int dy = -4; dy <= 4; dy++) {
+			int ny = y + dy;
+			if (ny >= 0 && ny < height) {
+				if (points[x][ny].getState() != PointState.UNOCCUPIED || dx == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+					adjacentOccupiedCount++;
+					if (adjacentOccupiedCount == 4) {
+						return true;
+					}
+				}
+				else {
+					/* there is an interruption in the continuity of occupied points, so reset to 0 */
+					adjacentOccupiedCount = 0;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isValidUpRightDiagonalMove(int x, int y) {
+		Point point = points[x][y];
+		if (point.getState() != PointState.UNOCCUPIED) {
+			return false;
+		}
+		int adjacentOccupiedCount = 0;
+		for (int dc = -4; dc <= 4; dc++) {
+			int nx = x + dc;
+			int ny = y + dc;
+			if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+				if (points[nx][ny].getState() != PointState.UNOCCUPIED  || dc == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+					adjacentOccupiedCount++;
+					if (adjacentOccupiedCount == 4) {
+						return true;
+					}
+				}
+				else {
+					/* there is an interruption in the continuity of occupied points, so reset to 0 */
+					adjacentOccupiedCount = 0;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isValidDownRightDiagonalMove(int x, int y) {
+		Point point = points[x][y];
+		if (point.getState() != PointState.UNOCCUPIED) {
+			return false;
+		}
+		int adjacentOccupiedCount = 0;
+		for (int dc = -4; dc <= 4; dc++) {
+			int nx = x - dc;
+			int ny = y + dc;
+			if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+				if (points[nx][ny].getState() != PointState.UNOCCUPIED  || dc == 0) { /* I don't get "line" point state. == Unocc could be changed to == Occ. */
+					adjacentOccupiedCount++;
+					if (adjacentOccupiedCount == 4) {
+						return true;
+					}
+				}
+				else {
+					/* there is an interruption in the continuity of occupied points, so reset to 0 */
+					adjacentOccupiedCount = 0;
+				}
+			}
+		}
+		return false;
+	}
+		
+		
 
 	public void placePoint(int x, int y, int moveNumber) {
 		Point point = points[x][y];
