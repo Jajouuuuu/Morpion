@@ -13,6 +13,10 @@ import com.google.gson.Gson;
 public class Utilisateur {
     private String nomUtilisateur;
     private String motDePasse;
+    
+    public Utilisateur() {
+        // No-args constructor
+    }
 
     public Utilisateur(String nomUtilisateur, String motDePasse) {
         this.nomUtilisateur = nomUtilisateur;
