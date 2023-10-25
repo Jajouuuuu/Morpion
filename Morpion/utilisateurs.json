@@ -1,5 +1,1 @@
-<<<<<<< Upstream, based on Morpion/dev/jaj
-[{"nomUtilisateur":"Jajou","motDePasse":"***************"},{"nomUtilisateur":"Jajou","motDePasse":"***************"}]
-=======
-[{"nomUtilisateur":"Jajou","motDePasse":"$2a$12$p9/jyVQZPstvGu4JnlvA7O5zpC.LLVZuCVTFu7AUqwqVn3u46YhJi"},{"nomUtilisateur":"Jajou","motDePasse":"$2a$12$p9/jyVQZPstvGu4JnlvA7O5zpC.LLVZuCVTFu7AUqwqVn3u46YhJi"},{"nomUtilisateur":"Paulo","motDePasse":"$2a$12$AOQp7xE1y/ZKlnVTl74uqu/bCu9LEXif8PgJRs3OCMjQDpu.4r56K"},{"nomUtilisateur":"Paulo","motDePasse":"$2a$12$AOQp7xE1y/ZKlnVTl74uqu/bCu9LEXif8PgJRs3OCMjQDpu.4r56K"},{"nomUtilisateur":"Test","motDePasse":"$2a$12$u1f6anke8Hh78X/RAnsin.YMKX6fd2CDI3U3WfVDT.oj6mkWYxJIa"},{"nomUtilisateur":"Test","motDePasse":"$2a$12$u1f6anke8Hh78X/RAnsin.YMKX6fd2CDI3U3WfVDT.oj6mkWYxJIa"},{"nomUtilisateur":"Bebou","motDePasse":"$2a$12$tDX0C9SJjDEvSlCUK/130O.prVzEBLfvO/MUMBxe6y0/vHVKr1OU6"},{"nomUtilisateur":"Bebou","motDePasse":"$2a$12$tDX0C9SJjDEvSlCUK/130O.prVzEBLfvO/MUMBxe6y0/vHVKr1OU6"}]
->>>>>>> 7d1fc5e Fix Gson error with a no args constructeur in Utilisateur
+[{"nomUtilisateur":"Paul","motDePasse":"$2a$12$i.3To50rjbITfYchmHdH3evb1nX5fn.Qj5Pam.q7FM1Yb4IGRPbGe"},{"nomUtilisateur":"Paul","motDePasse":"$2a$12$i.3To50rjbITfYchmHdH3evb1nX5fn.Qj5Pam.q7FM1Yb4IGRPbGe"}]

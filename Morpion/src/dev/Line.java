@@ -4,60 +4,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
+	private final List<Point> points;
+	private Point newPoint;
+	private int number;
+	private Direction direction;
 
-	private Point startPoint;
-	private LineDirection direction;
-	private List<Point> points;
+	public Line() {
+		points = new ArrayList<>();
+	}
 
-	public Line(Point startPoint, LineDirection direction) {
-		this.startPoint = startPoint;
-		this.direction = direction;
+	public Line(List<Point> points, Direction direction) {
 		this.points = new ArrayList<>();
-		points.add(startPoint);
-		switch (direction) {
-		case VERTICAL:
-			for (int y = startPoint.getY() + 1; y < startPoint.getY() + 5; y++) { /* Pourquoi +1 ? */
-				points.add(new Point(startPoint.getX(), y));
-				/*
-				 * Ca fait quoi en fait ? Ou cherche à faire quoi ? Il faut pas une condition
-				 * sur est occupé avant de l'ajouter à points ? Ou sinon utuliser ce que j'ai
-				 * écrit dans isMoveXXXValid pour savir quelle direction a été donnéee ?
-				 */
-			}
-			break;
-		case HORIZONTAL:
-			for (int x = startPoint.getX() + 1; x < startPoint.getX() + 5; x++) {
-				points.add(new Point(x, startPoint.getY()));
-			}
-			break;
-		case DIAGONAL_UP_RIGHT:
-			for (int x = startPoint.getX() + 1, y = startPoint.getY() + 1; x < startPoint.getX() + 5
-					&& y < startPoint.getY() + 5; x++, y++) {
-				points.add(new Point(x, y));
-			}
-			break;
-		case DIAGONAL_DOWN_RIGHT:
-			for (int x = startPoint.getX() + 1, y = startPoint.getY() - 1; x < startPoint.getX() + 5
-					&& y >= startPoint.getY() - 4; x++, y--) {
-				points.add(new Point(x, y));
-			}
-			break;
-		}
+		this.points.addAll(points);
+		this.direction = direction;
 	}
 
-	public Point getStartPoint() {
-		return startPoint;
+	public Line(List<Point> points, Point newPoint, Direction direction, int number) {
+		this.points = new ArrayList<>();
+		this.points.addAll(points);
+		this.newPoint = newPoint;
+		this.direction = direction;
+		this.number = number;
 	}
 
-	public LineDirection getDirection() {
+	public void addPoint(Point point) {
+		points.add(point);
+	}
+
+	public String toString() {
+		return newPoint + "-" + direction + ": " + points.toString();
+	}
+
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+
+	public Direction getDirection() {
 		return direction;
 	}
 
-	public List<Point> getPoints() {
+	public List<Point> points() {
 		return points;
 	}
 
-	public boolean isComplete() {
-		return points.size() == 5;
+	public void setNewPoint(Point newPoint) {
+		this.newPoint = newPoint;
+	}
+
+	public Point getNewPoint() {
+		return newPoint;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 }
