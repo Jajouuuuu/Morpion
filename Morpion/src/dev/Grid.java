@@ -112,7 +112,7 @@ public class Grid {
 		return points[x][y];
 	}
 
-	public boolean isValidMove(int x, int y) {
+	public boolean isValidMove(int x, int y, Line futurLine) {
 		Point point = new Point(x, y);
 		if (isValidHorizontalMove(x, y, point) || isValidVerticalMove(x,y, point) || isValidUpRightDiagonalMove(x,y, point) || isValidDownRightDiagonalMove(x,y, point)) {
 			System.out.println("True ????");
@@ -132,7 +132,10 @@ public class Grid {
 			if (nx >= 0 && nx < this.width && nx != x) {
 				if (points[nx][y].getState() == PointState.OCCUPIED) { 
 					for (LineDirection lineDirection : points[nx][y].getUsedInDirection()) {
-						if (lineDirection == LineDirection.HORIZONTAL && adjacentInSameLineCount == 1) continue ;
+						if (lineDirection == LineDirection.HORIZONTAL && adjacentInSameLineCount == 1) {
+							if (adjacentOccupiedCount < 4) continue ;
+							else return true
+						}
 						if (lineDirection == LineDirection.HORIZONTAL && adjacentInSameLineCount == 0) adjacentInSameLineCount ++;
 						else adjacentInSameLineCount = 0;
 					}
@@ -222,7 +225,7 @@ public class Grid {
 		Point point = points[x][y];
 		point.setState(PointState.OCCUPIED);
 		point.setMoveNumber(moveNumber);
-		point.setInLines(null);
+		point.setUsedInDirection(null);
 		for (LineDirection direction : LineDirection.values()) {
 			Line line = new Line(point, direction);
 			if (line.isComplete()) {

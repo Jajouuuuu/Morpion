@@ -8,6 +8,9 @@ public class Line {
 	private Point startPoint;
 	private LineDirection direction;
 	private List<Point> points;
+	
+	public Line() {
+	}
 
 	public Line(Point startPoint, LineDirection direction) {
 		this.startPoint = startPoint;

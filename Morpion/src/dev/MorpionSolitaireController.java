@@ -41,7 +41,8 @@ public class MorpionSolitaireController {
 		System.out.println(x);
 		System.out.println(y);
 		scanner.nextLine();
-		if (model.getGrid().isValidMove(x, y)) {
+		Line futurLine = new Line();
+		if (model.getGrid().isValidMove(x, y, futurLine)) {
 			System.out.println("Move Valid ?");
 			return new int[] { x, y };
 		}
