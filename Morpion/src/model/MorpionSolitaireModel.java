@@ -78,7 +78,7 @@ public class MorpionSolitaireModel {
 			player = "Pas de nom de joueur !";
 		}
 		try {
-			ScoreSaveLoad.saveScore(new Score(player, grid.lines().size()));
+			ScoreSauvegarde.saveScore(new Score(player, grid.lines().size()));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

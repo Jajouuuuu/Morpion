@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ScoreSaveLoad {
+public class ScoreSauvegarde {
 	
     private static final String scorePath = "resultats.csv";
 
