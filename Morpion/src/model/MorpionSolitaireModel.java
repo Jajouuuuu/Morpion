@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
 
 public class MorpionSolitaireModel {
@@ -98,7 +99,7 @@ public class MorpionSolitaireModel {
 			}
 			System.out.println("Mouvement non valide.");
 			return;
-		}
+		}		
 		List<Line> possibleLines = grid.possibleLines(x, y);
 		if (possibleLines.size() == 0) {
 			System.out.println("Mouvement non valide.");
@@ -112,6 +113,18 @@ public class MorpionSolitaireModel {
 			updateObservers();
 		}
 		System.out.println(possibleLines);
+	}
+	
+	public void handleRandomMove() {
+		Random rd = new Random(); 
+		List<Line> possibleLines = grid.possibleLines();
+		if (possibleLines.size() == 0) {
+			checkGameOver();
+		} else {
+			makeMove(possibleLines.get(rd.nextInt(possibleLines.size())));
+			checkGameOver();
+		}
+		System.out.println(possibleLines.get(0));
 	}
 
 	private void checkGameOver() {
