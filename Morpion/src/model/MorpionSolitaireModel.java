@@ -121,10 +121,11 @@ public class MorpionSolitaireModel {
 		if (possibleLines.size() == 0) {
 			checkGameOver();
 		} else {
-			makeMove(possibleLines.get(rd.nextInt(possibleLines.size())));
+			int index = rd.nextInt(possibleLines.size());
+			makeMove(possibleLines.get(index));
+			System.out.println(possibleLines.get(index));
 			checkGameOver();
 		}
-		System.out.println(possibleLines.get(0));
 	}
 
 	private void checkGameOver() {
