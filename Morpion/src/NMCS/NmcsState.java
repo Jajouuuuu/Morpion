@@ -1,6 +1,5 @@
 package NMCS;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -47,8 +46,10 @@ public class NmcsState {
 			int index = rd.nextInt(possibleLines.size());
 			grid.addLine(possibleLines.get(index));
 			possibleLines.clear();
+			this.possibleLines = grid.possibleLines();
 			checkTerminalPosition();
 		}
+		this.score = grid.lines().size();
 	}
 	
 	public void checkTerminalPosition() {

@@ -36,7 +36,7 @@ public class MorpionSolitaireController {
 		int gridX = (int) Math.round(tempX);
 		int gridY = (int) Math.round(tempY);
 		if (gridX == -1 && gridY == -1) {
-			model.handleNmcsMove();
+			model.handleNmcsGame();
 		}
 		else { 
 			model.handleHumanMove(gridX, gridY);

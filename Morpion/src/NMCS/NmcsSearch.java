@@ -7,13 +7,13 @@ public class NmcsSearch {
 	public static NmcsState searchBestState(NmcsState state, final int level) {
 // Maybe change name of state to branch, because it a branch of exploration in the tree of possible moves
 
-		// terminating case, we do random moves until it terminated to get the score
+		// terminating case, we do random moves until the end to get the score
 		if (level <= 0) {
 			state.simulationToTheEnd();
 			return state;
 		}
-
-		NmcsState currentBestState = new NmcsState(state.getGrid(), state.getScore());
+		
+		NmcsState BestState = new NmcsState(state.getGrid());
 		
 		for (Line move : state.getPossibleLines()) {
 			
@@ -21,13 +21,13 @@ public class NmcsSearch {
 			// recursion
 			NmcsState simulationState = searchBestState(currentState, level - 1);
 
-			if (simulationState.getScore() >= currentBestState.getScore()) {
-				currentBestState = simulationState;
-				currentBestState.setAddedLine(move);
+			if (simulationState.getScore() >= BestState.getScore()) {
+				BestState = simulationState;
+				BestState.setAddedLine(move);
 			}
 		}
 		
-		return currentBestState;
+		return BestState;
 	}
 	
 }

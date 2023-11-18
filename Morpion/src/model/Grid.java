@@ -233,4 +233,8 @@ public class Grid implements Serializable {
 		newGrid.addLine(line);
 		return newGrid;
 	}
+
+	public List<Line> getLines() {
+		return lines;
+	}
 }

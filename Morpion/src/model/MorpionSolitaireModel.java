@@ -131,14 +131,28 @@ public class MorpionSolitaireModel {
 		}
 	}
 	
+	public void handleRandomGame() {
+		while (!gameOver) {
+			handleRandomMove();
+			System.out.println(grid.getLines().size());
+		}
+	}
+	
 	public void handleNmcsMove() {
-		int level = 2;
+		int level = 1;
 		NmcsState state = new NmcsState(this.grid);
 		NmcsState bestState = NmcsSearch.searchBestState(state, level);
 		Line line = bestState.getAddedLine();
 		makeMove(line);
 		System.out.println(line);
 		checkGameOver();
+	}
+	
+	public void handleNmcsGame() {
+		while (!gameOver) {
+			handleNmcsMove();
+			System.out.println(grid.getLines().size());
+		}
 	}
 	
 	private void checkGameOver() {
