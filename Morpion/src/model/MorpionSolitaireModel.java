@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import NMCS.NmcsState;
+
 
 public class MorpionSolitaireModel {
 	
@@ -126,6 +128,11 @@ public class MorpionSolitaireModel {
 			System.out.println(possibleLines.get(index));
 			checkGameOver();
 		}
+	}
+	
+	public void handleNmcsMove() {
+		NmcsState state = new NmcsState(this.grid);
+		Line line = searchBestMove(NmcsState state, final int level);
 	}
 
 	private void checkGameOver() {
