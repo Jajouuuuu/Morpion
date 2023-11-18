@@ -36,9 +36,11 @@ public class MorpionSolitaireController {
 		int gridX = (int) Math.round(tempX);
 		int gridY = (int) Math.round(tempY);
 		if (gridX == -1 && gridY == -1) {
-			model.handleRandomMove();
+			model.handleNmcsMove();
 		}
-		model.handleHumanMove(gridX, gridY);
+		else { 
+			model.handleHumanMove(gridX, gridY);
+		}
 	}
 
 	public void start() {

@@ -14,7 +14,7 @@ import model.Line;
 public class NmcsState {
 	private Grid grid;
 	private int score;
-	private List<Line> addedLines = new ArrayList<Line>();
+	private Line addedLine;
 	private List<Line> possibleLines;
 	private boolean isTerminalPosition;
 
@@ -32,7 +32,7 @@ public class NmcsState {
 		this.isTerminalPosition = (this.possibleLines.size() == 0);
 	}
 	
-	public NmcsState newState(Line line) {
+	public NmcsState nextState(Line line) {
 		Grid copyGrid = this.grid.copy();
 //		code from makeMove function in MorpionSolitaireModel.java
 		copyGrid.addLine(line);
@@ -43,7 +43,7 @@ public class NmcsState {
 	
 	public void simulationToTheEnd() {
 		Random rd = new Random(); 
-		while (! this.isTerminalPosition) {
+		while (!this.isTerminalPosition) {
 			int index = rd.nextInt(possibleLines.size());
 			grid.addLine(possibleLines.get(index));
 			possibleLines.clear();
@@ -71,12 +71,12 @@ public class NmcsState {
 		this.score = score;
 	}
 
-	public List<Line> getAddedLines() {
-		return addedLines;
+	public Line getAddedLine() {
+		return addedLine;
 	}
 
-	public void setAddedLines(List<Line> addedLines) {
-		this.addedLines = addedLines;
+	public void setAddedLine(Line addedLine) {
+		this.addedLine = addedLine;
 	}
 
 	public List<Line> getPossibleLines() {

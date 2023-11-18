@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import NMCS.NmcsState;
+import NMCS.NmcsSearch;
 
 
 public class MorpionSolitaireModel {
@@ -131,10 +132,15 @@ public class MorpionSolitaireModel {
 	}
 	
 	public void handleNmcsMove() {
+		int level = 2;
 		NmcsState state = new NmcsState(this.grid);
-		Line line = searchBestMove(NmcsState state, final int level);
+		NmcsState bestState = NmcsSearch.searchBestState(state, level);
+		Line line = bestState.getAddedLine();
+		makeMove(line);
+		System.out.println(line);
+		checkGameOver();
 	}
-
+	
 	private void checkGameOver() {
 		HashSet<Point> pointsSoFar = new HashSet<>();
 		List<Line> possibleLines = new ArrayList<>();
