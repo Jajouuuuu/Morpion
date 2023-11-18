@@ -5,44 +5,46 @@ import java.util.List;
 import model.Grid;
 import model.Line;
 
-public class NmcsSearch {
+public class NmcsSearch { 
 	
-	public static NmcsState searchBestMove(NmcsState state, final int level) {
+	public static NmcsState searchBestState(NmcsState state, final int level) {
+// Maybe change name of state to branch, because it a branch of exploration in the tree of possible moves
 
-//		terminating case : we do random moves until it terminated to get the score
-		if (level <= 0)
-			return state.simulation();
-
-		NmcsState   = new NmcsState(state.getGrid());
-		final List<Line> lines;
+		// terminating case, we do random moves until it terminated to get the score
+		if (level <= 0) {
+			state.simulationToTheEnd();
+			return state;
+		}
+		NmcsState globalBestState = new NmcsState(state.getGrid());
+		final List<Line> movesDone;
 
 		while (!state.isTerminalPosition()) {
 			
-			NmcsState currentBestResult = new NmcsState(state.getGrid(), state.getScore());
+			NmcsState currentBestState = new NmcsState(state.getGrid(), state.getScore());
 			Line currentBestMove = null;
 			
 			for (Line move : state.getPossibleLines()) {
 				
 				final NmcsState currentState = state.newState(move);
 				// recursion
-				NmcsState simulationResult = searchBestMove(currentState, level - 1);
+				NmcsState simulationState = searchBestState(currentState, level - 1);
 	
-				if (simulationResult.getScore() >= currentBestResult.getScore()) {
+				if (simulationState.getScore() >= currentBestState.getScore()) {
 					currentBestMove = move;
-					currentBestResult = simulationResult;
+					currentBestState = simulationState;
 				}
 			}
 	
-			if (currentBestResult.getScore() >= globalBestResult.getScore()) {
-				lines.add(currentBestMove);
-				globalBestResult = currentBestResult;
-				globalBestResult.lines.addAll(0, lines);
+			if (currentBestState.getScore() >= globalBestState.getScore()) {
+				movesDone.add(currentBestMove);
+				globalBestState = currentBestState;
+				globalBestState.getAddedLines().addAll(0, movesDone);
 			} else {
-				currentBestAction = globalBestResult.item2.get(visitedNodes.size());
-				visitedNodes.add(currentBestAction);
+				currentBestMove = globalBestState.getAddedLines().get(movesDone.size());
+				movesDone.add(currentBestMove);
 			}
 	
-			state = state.takeAction(currentBestAction);
+			state = state.getGrid().makeMove(currentBestMove);
 		}		
 		return globalBestResult;
 	}
