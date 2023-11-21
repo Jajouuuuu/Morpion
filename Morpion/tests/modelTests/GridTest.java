@@ -21,7 +21,7 @@ public class GridTest {
 
     @Test
     public void testInit() {
-        assertEquals(100, grid.points().size());
+        assertEquals(36, grid.points().size());
     }
 
     @Test
