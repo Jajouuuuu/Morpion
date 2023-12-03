@@ -1,14 +1,16 @@
 package view;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+
 import model.PlayObserver;
 import model.Grid;
 import model.Line;
 import model.Point;
 
 import java.util.List;
+
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class MorpionSolitaireView implements PlayObserver {
 
@@ -28,7 +30,7 @@ public class MorpionSolitaireView implements PlayObserver {
 	}
 
 	public static final Theme M_THEME = new Theme(
-	        Color.web("#03ba00"),
+	        Color.web("#B0E0E6"),
 	        Color.web("#d0cdd4"),
 	        Color.web("#b5a600"),
 	        Color.web("#f6f2fa"),

@@ -1,5 +1,6 @@
 package controler;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
@@ -44,6 +45,7 @@ public class MorpionSolitaireController {
 	}
 
 	public void start() {
+		System.out.println("Contrôleur MorpionSolitaire initialisé.");
 		view = new MorpionSolitaireView(canvaJeu);
 		canvaJeu.setFocusTraversable(true);
 		model.addGameObserver(view);
@@ -53,7 +55,7 @@ public class MorpionSolitaireController {
 	
 	private void setupOptions() {
 		view.setTheme(MorpionSolitaireView.M_THEME);
-		theme.getParent().getScene().getRoot().setStyle("-fx-base: #0d3d00");
+		theme.getParent().getScene().getRoot().setStyle("-fx-base: #6495ED");
 		mode.getItems().removeAll(mode.getItems());
 		mode.getItems().addAll("5T", "5D");
 		mode.getSelectionModel().select("5D");
@@ -80,4 +82,13 @@ public class MorpionSolitaireController {
 	public void setModel(MorpionSolitaireModel model) {
 		this.model = model;
 	}
+	
+	public void setModelAndView(MorpionSolitaireModel model, MorpionSolitaireView view) {
+        this.model = model;
+        this.view = view;
+    }
+	
+	public Canvas getCanvas() {
+        return canvaJeu;
+    }
 }
