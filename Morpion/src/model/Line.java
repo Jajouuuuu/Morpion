@@ -17,7 +17,15 @@ public class Line implements Serializable {
         points = new ArrayList<>();
     }
 
-    public Line(Collection<Point> points, Direction direction) {
+    public int getN() {
+		return n;
+	}
+
+	public void setN(int n) {
+		this.n = n;
+	}
+
+	public Line(Collection<Point> points, Direction direction) {
         this.points = new ArrayList<>();
         this.points.addAll(points);
         this.direction = direction;

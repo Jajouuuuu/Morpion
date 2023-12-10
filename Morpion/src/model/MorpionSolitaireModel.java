@@ -1,17 +1,20 @@
 package model;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import NMCS.NmcsState;
 import NMCS.NmcsSearch;
+import NMCS.NmcsState;
 
 
-public class MorpionSolitaireModel {
-	
+public class MorpionSolitaireModel implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private static final int GRID_WIDTH = 14;
 	private static final int GRID_HEIGHT = 14;
 	private Grid grid;
@@ -21,10 +24,15 @@ public class MorpionSolitaireModel {
 	private final ArrayList<ScoreObserver> scoreObs;
 	private String player;
 	private boolean gameOver;
-	
+	private List<Point> playedPoints;
+	private List<Line> playedLines;
+
+
 	public MorpionSolitaireModel() {
 		playObs = new ArrayList<>();
 		scoreObs = new ArrayList<>();
+		playedPoints = new ArrayList<>(); 
+        playedLines = new ArrayList<>();
 		init();
 	}
 
@@ -47,9 +55,9 @@ public class MorpionSolitaireModel {
 			}
 		}
 		List<Line> hintLines = new ArrayList<>();
-        if (hintVisible) {
-            hintLines.addAll(grid.possibleLines());
-        }
+		if (hintVisible) {
+			hintLines.addAll(grid.possibleLines());
+		}
 		playObs.forEach(gameObserver -> gameObserver.update(grid, points, hintLines));
 		scoreObs.forEach(scoreObserver -> scoreObserver.updateScore(getScore()));
 	}
@@ -68,6 +76,11 @@ public class MorpionSolitaireModel {
 		gameOver = false;
 		lignesPossibles = new ArrayList<>();
 		updateObservers();
+
+	}
+
+	public Mode getGameMode() {
+		return grid.getMode();
 	}
 
 	private void gameOver() {
@@ -116,7 +129,24 @@ public class MorpionSolitaireModel {
 			updateObservers();
 		}
 		System.out.println(possibleLines);
+		playedPoints.add(new Point(x, y));
 	}
+
+	public List<Score> getTopScores(int count) {
+	    List<Score> topScores = new ArrayList<>();
+	    List<Score> allScores = new ArrayList<>();
+	    for (int i = 0; i < playedPoints.size(); i++) {
+	        Point point = playedPoints.get(i);
+	        Line line = playedLines.get(i);
+	        allScores.add(new Score(player, line.getN()));
+	    }
+	    allScores.sort(Collections.reverseOrder());
+	    int size = Math.min(count, allScores.size());
+	    topScores.addAll(allScores.subList(0, size));
+	    System.out.println(topScores);
+	    return topScores;
+	}
+
 	
 	public void handleRandomMove() {
 		Random rd = new Random(); 
@@ -130,14 +160,30 @@ public class MorpionSolitaireModel {
 			checkGameOver();
 		}
 	}
-	
+
 	public void handleRandomGame() {
 		while (!gameOver) {
 			handleRandomMove();
 			System.out.println(grid.getLines().size());
 		}
 	}
-	
+
+	public List<Point> getPlayedPoints() {
+		return playedPoints;
+	}
+
+	public void setPlayedPoints(List<Point> playedPoints) {
+		this.playedPoints = playedPoints;
+	}
+
+	public List<Line> getPlayedLines() {
+		return playedLines;
+	}
+
+	public void setPlayedLines(List<Line> playedLines) {
+		this.playedLines = playedLines;
+	}
+
 	public void handleNmcsMove() {
 		int level = 1;
 		NmcsState state = new NmcsState(this.grid);
@@ -147,14 +193,14 @@ public class MorpionSolitaireModel {
 		System.out.println(line);
 		checkGameOver();
 	}
-	
+
 	public void handleNmcsGame() {
 		while (!gameOver) {
 			handleNmcsMove();
 			System.out.println(grid.getLines().size());
 		}
 	}
-	
+
 	private void checkGameOver() {
 		HashSet<Point> pointsSoFar = new HashSet<>();
 		List<Line> possibleLines = new ArrayList<>();
@@ -177,8 +223,9 @@ public class MorpionSolitaireModel {
 		grid.addLine(line);
 		lignesPossibles.clear();
 		updateObservers();
+		playedLines.add(line);
 	}
-	
+
 	public void setGameMode(Mode mode) {
 		this.grid.setMode(mode);
 	}
@@ -201,5 +248,13 @@ public class MorpionSolitaireModel {
 		grid.undoLine();
 		checkGameOver();
 		updateObservers();
+	}
+
+	public Grid getGrid() {
+		return grid;
+	}
+
+	public void setGrid(Grid loadedGrid) {
+		this.grid = loadedGrid;
 	}
 }

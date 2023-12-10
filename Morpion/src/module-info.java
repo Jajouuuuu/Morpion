@@ -5,6 +5,9 @@ module Morpion {
 	requires javafx.fxml;
 	requires javafx.controls;
 	requires com.fasterxml.jackson.databind;
+	requires java.desktop;
+	
+	
 		
     opens app to javafx.fxml;
     exports app;

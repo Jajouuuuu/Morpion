@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.FirstLoginController">
+
+<AnchorPane fx:id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #cce6ff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.FirstLoginController">
    <children>
-      <TextField fx:id="newUsernameField" layoutX="145.0" layoutY="86.0" promptText="New Username" />
-      <PasswordField fx:id="newPasswordField" layoutX="145.0" layoutY="136.0" promptText="New Password" />
-      <Button layoutX="145.0" layoutY="186.0" mnemonicParsing="false" onAction="#createUserButtonAction" text="Create User" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#99ceff" height="243.0" layoutX="45.0" layoutY="79.0" stroke="TRANSPARENT" strokeType="INSIDE" width="245.0" />
+      <PasswordField fx:id="newPasswordField" layoutX="91.0" layoutY="234.0" promptText="mdp" />
+      <TextField fx:id="newUsernameField" layoutX="90.0" layoutY="174.0" promptText="pseudo" />
+      <Button layoutX="142.0" layoutY="279.0" mnemonicParsing="false" onAction="#createUserButtonAction" text="Créer" />
+      <Text layoutX="91.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo :" />
+      <Text layoutX="90.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :" />
+      <ImageView fitHeight="243.0" fitWidth="220.0" layoutX="339.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@morpion.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="71.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créez vous un compte pour jouer librement au Morpion Solitaire !" textAlignment="CENTER" wrappingWidth="192.02032470703125">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package app;
 
 import controler.ConnexionController;
 import controler.FirstLoginController;
+import controler.MeilleursScoresController;
 import controler.MorpionSolitaireController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ public class App extends Application {
 
 	private Stage primaryStage;
 
+	@SuppressWarnings("exports")
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		loadLoginPage();
@@ -57,12 +59,34 @@ public class App extends Application {
 			MorpionSolitaireModel gameModel = new MorpionSolitaireModel();
 			MorpionSolitaireView gameView = new MorpionSolitaireView(controller.getCanvas());
 			controller.setModelAndView(gameModel, gameView);
+			controller.setApp(this);
 			controller.start();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public void loadMeilleursScoresPage() {
+	    System.out.println("Chargement de meilleurs scores");
+	    try {
+	        FXMLLoader meilleursScoresLoader = new FXMLLoader(getClass().getResource("/MeilleursScores.fxml"));
+	        Parent meilleursScoresRoot = meilleursScoresLoader.load();
+	        Scene meilleursScoresScene = new Scene(meilleursScoresRoot);
+
+	        primaryStage.setTitle("Meilleurs Scores");
+	        primaryStage.setScene(meilleursScoresScene);
+	        primaryStage.show();
+	        MeilleursScoresController meilleursScoresController = meilleursScoresLoader.getController();
+	        MorpionSolitaireModel morpionSolitaireModel = new MorpionSolitaireModel(); 
+	        meilleursScoresController.setModelAndInitialize(morpionSolitaireModel);
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+
 
 	public void loadFirstLoginPage() {
 		try {

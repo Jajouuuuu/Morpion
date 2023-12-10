@@ -1,6 +1,8 @@
 package model;
 
-public enum Mode {
-	
+import java.io.Serializable;
+
+public enum Mode implements Serializable {
+    
     FT, FD
 }
