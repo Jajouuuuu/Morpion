@@ -68,8 +68,7 @@ public class LineTest {
         int number = 42;
 
         Line line = new Line(points, newPoint, direction, number);
-
-        assertEquals("(4,4)-HORIZONTAL:[(1,1),(2,2),(3,3)]", line.toString());
+        assertEquals("(4,4)-HORIZONTAL: [(1,1), (2,2), (3,3)]", line.toString());
     }
 
     @Test
