@@ -3,6 +3,7 @@ package controler;
 
 import java.util.List;
 
+import app.App;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -20,6 +21,11 @@ public class MeilleursScoresController {
     
     public void initialize() {
         System.out.println(model);
+    }
+    
+    @FXML
+	private void handleRetourButton() {
+    	 App.getInstance().loadPreviousPage();
     }
 
     public void setModelAndInitialize(MorpionSolitaireModel model) {

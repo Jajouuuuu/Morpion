@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.App;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -25,18 +27,21 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 	private transient Theme theme;
 	private List<Point> playedPoints;
 	private List<Line> playedLines;
+	private Parent root; 
+	private App app;
 
 	@SuppressWarnings("exports")
-	public MorpionSolitaireView(Canvas canva) {
+	public MorpionSolitaireView(Canvas canva, App app) {
 		this.canva = canva;
 		this.playedPoints = new ArrayList<>();
 		this.playedLines = new ArrayList<>();
 		canva.setWidth(WIDTH);
 		canva.setHeight(HEIGHT);
+		this.app = app; 
 	}
 
 	public MorpionSolitaireView() {
-		this.canva = new Canvas(); // Make sure to initialize canva
+		this.canva = new Canvas();
 		this.playedPoints = new ArrayList<>();
 		this.playedLines = new ArrayList<>();
 		canva.setWidth(WIDTH);
@@ -128,9 +133,24 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 			highlightLines.forEach(line -> drawLine(line, g));
 			playedPoints.addAll(grid.points());
 			playedLines.addAll(grid.lines());
+			
+			System.out.println("history " + app.getPageHistory());
+			System.out.println("root " + root);
+			if (root != null) {
+				app.getPageHistory().push(this.root);
+				System.out.println("history " + app.getPageHistory());
+			}
 		} else {
 			System.err.println("Error: canva is null in MorpionSolitaireView.update()");
 		}
+	}
+
+	public void setApp(App app) {
+		this.app = app;
+	}
+
+	public void setRoot(Parent root) {
+		this.root = root;
 	}
 
 	private double snap(double num) {

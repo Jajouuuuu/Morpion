@@ -3,14 +3,14 @@ package model;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
 import NMCS.NmcsSearch;
 import NMCS.NmcsState;
-
+import controler.ConnexionController;
 
 public class MorpionSolitaireModel implements Serializable {
 
@@ -26,16 +26,20 @@ public class MorpionSolitaireModel implements Serializable {
 	private boolean gameOver;
 	private List<Point> playedPoints;
 	private List<Line> playedLines;
-
+	private User user;
+	private ConnexionController connexionController;
 
 	public MorpionSolitaireModel() {
-		playObs = new ArrayList<>();
-		scoreObs = new ArrayList<>();
-		playedPoints = new ArrayList<>(); 
-        playedLines = new ArrayList<>();
+		this.playObs = new ArrayList<>();
+		this.scoreObs = new ArrayList<>();
+		this.playedPoints = new ArrayList<>(); 
+        this.playedLines = new ArrayList<>();
 		init();
 	}
 
+	public void setConnexionController(ConnexionController connexionController) {
+        this.connexionController = connexionController;
+    }
 	public boolean isGameOver() {
 		System.out.println(gameOver);
 		return gameOver;
@@ -71,12 +75,17 @@ public class MorpionSolitaireModel implements Serializable {
 	}
 
 	public void init() {
-		grid = new Grid(GRID_WIDTH, GRID_HEIGHT, Mode.FD);
-		grid.init();
-		gameOver = false;
-		lignesPossibles = new ArrayList<>();
-		updateObservers();
-
+	    grid = new Grid(GRID_WIDTH, GRID_HEIGHT, Mode.FD);
+	    grid.init();
+	    gameOver = false;
+	    lignesPossibles = new ArrayList<>();
+	    updateObservers();
+	    if (connexionController != null) {
+	        player = connexionController.getCurrentUsername();
+	        System.out.println();
+	    } else {
+	        player = "DefaultPlayer";
+	    }
 	}
 
 	public Mode getGameMode() {
@@ -92,7 +101,7 @@ public class MorpionSolitaireModel implements Serializable {
 
 	private void checkAndSaveScore() {
 		if (player == null) {
-			player = "Pas de nom de joueur !";
+			player = user.getUsername();
 		}
 		try {
 			ScoreSauvegarde.saveScore(new Score(player, grid.lines().size()));
@@ -133,20 +142,17 @@ public class MorpionSolitaireModel implements Serializable {
 	}
 
 	public List<Score> getTopScores(int count) {
-	    List<Score> topScores = new ArrayList<>();
-	    List<Score> allScores = new ArrayList<>();
-	    for (int i = 0; i < playedPoints.size(); i++) {
-	        Point point = playedPoints.get(i);
-	        Line line = playedLines.get(i);
-	        allScores.add(new Score(player, line.getN()));
+	    List<Score> topScores;
+	    try {
+	        List<Score> allScores = ScoreSauvegarde.loadScores();
+	        allScores.sort(Comparator.comparing(Score::getScore).reversed()); 
+	        int size = Math.min(count, allScores.size());
+	        topScores = allScores.subList(0, size);
+	    } catch (IOException e) {
+	        throw new RuntimeException("Erreur lors du chargement des scores.", e);
 	    }
-	    allScores.sort(Collections.reverseOrder());
-	    int size = Math.min(count, allScores.size());
-	    topScores.addAll(allScores.subList(0, size));
-	    System.out.println(topScores);
 	    return topScores;
 	}
-
 	
 	public void handleRandomMove() {
 		Random rd = new Random(); 

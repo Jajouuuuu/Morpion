@@ -19,6 +19,7 @@ public class ConnexionController {
 
     private UserManager userManager = new UserManager();
     private App mainApp;
+    private String currentUsername;
 
     @FXML
     private Button loginButton;
@@ -32,6 +33,10 @@ public class ConnexionController {
 
     public void setOnFirstLoginRequest(Runnable onFirstLoginRequest) {
         this.onFirstLoginRequest = onFirstLoginRequest;
+    }
+   
+    public String getCurrentUsername() {
+        return currentUsername;
     }
 
     @FXML
@@ -60,7 +65,9 @@ public class ConnexionController {
     }
 
     private void handleSuccessfulLogin() {
+        currentUsername = usernameField.getText();
         if (onLoginSuccess != null) {
+        	System.out.println(currentUsername);
             onLoginSuccess.run();
         }
     }

@@ -6,6 +6,7 @@ module Morpion {
 	requires javafx.controls;
 	requires com.fasterxml.jackson.databind;
 	requires java.desktop;
+	requires com.opencsv;
 	
 	
 		

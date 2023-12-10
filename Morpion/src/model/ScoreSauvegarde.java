@@ -11,7 +11,7 @@ public class ScoreSauvegarde {
 
     public static List<Score> loadScores() throws IOException {
         File file = new File(scorePath);
-        List<Score> scoresList;
+        List<Score> scoresList = null;
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             scoresList = new ArrayList<>();
             String line;
@@ -21,9 +21,11 @@ public class ScoreSauvegarde {
                 int x = line.indexOf(',');
                 String name = line.substring(0, x);
                 double score = Double.parseDouble(line.substring(x + 1));
-                Score scoreEntry = new Score(name, (int) score); 
+                Score scoreEntry = new Score(name, (int) score);
                 scoresList.add(scoreEntry);
             }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
         return scoresList;
     }

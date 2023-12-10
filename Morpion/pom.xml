@@ -72,6 +72,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+    		<groupId>com.opencsv</groupId>
+    		<artifactId>opencsv</artifactId>
+    		<version>5.9</version>
+		</dependency>
+		<dependency>
         	<groupId>com.fasterxml.jackson.core</groupId>
         	<artifactId>jackson-databind</artifactId>
         	<version>2.12.5</version> <!-- La version peut varier, veuillez vérifier la dernière version sur le site officiel -->
