@@ -9,10 +9,10 @@ import model.BlockedDirectionPoint;
 import model.Direction;
 
 
-class BlockedDirectionPointTest {
+public class BlockedDirectionPointTest {
 
     @Test
-    void testIsLocked() {
+    public void testIsLocked() {
         BlockedDirectionPoint point = new BlockedDirectionPoint(1, 1);
         assertFalse(point.isLocked(Direction.UP));
         assertFalse(point.isLocked(Direction.DOWN));
@@ -21,7 +21,7 @@ class BlockedDirectionPointTest {
     }
 
     @Test
-    void testLockAndUnlock() {
+    public void testLockAndUnlock() {
         BlockedDirectionPoint point = new BlockedDirectionPoint(1, 1);
         assertFalse(point.isLocked(Direction.UP));
         point.lock(Direction.UP);
@@ -33,7 +33,7 @@ class BlockedDirectionPointTest {
     }
 
     @Test
-    void testCopy() {
+    public void testCopy() {
         BlockedDirectionPoint original = new BlockedDirectionPoint(2, 2);
         original.lock(Direction.UP);
         original.lock(Direction.HORIZONTAL);

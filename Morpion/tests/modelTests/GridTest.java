@@ -15,13 +15,13 @@ public class GridTest {
 
     @Before
     public void setUp() {
-        grid = new Grid(10, 10, Mode.FT);
+        grid = new Grid(14, 14, Mode.FT);
         grid.init();
     }
 
     @Test
     public void testInit() {
-        assertEquals(100, grid.points().size());
+        assertEquals(36, grid.points().size());
     }
 
     @Test
