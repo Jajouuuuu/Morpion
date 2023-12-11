@@ -1,25 +1,20 @@
 package model;
 
-public class Score implements Comparable<Score> {
-    private String username;
-    private int score;
-
-    public Score(String user, int score) {
+public class Score {
+	
+    private String user;
+    private double score;
+    
+    public Score(String user, double score) {
         this.score = score;
-        this.username = user;
+        this.user = user;
     }
 	
     public String getUsername() {
-        return username;
+        return user;
     }
 
     public double getScore() {
         return score;
     }
-
-    @Override
-    public int compareTo(Score other) {
-        return Integer.compare(this.score, other.score);
-    }
-    
 }

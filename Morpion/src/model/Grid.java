@@ -18,7 +18,7 @@ public class Grid implements Serializable {
 		this.grid = new BlockedDirectionPoint[width][height];
 		lines = new ArrayList<>();
 		points = new HashSet<>();
-		this.setMode(mode);
+		this.mode = mode;
 	}
 
 	public Set<Point> points() {
@@ -74,13 +74,13 @@ public class Grid implements Serializable {
 		}
 		ArrayList<Line> possibleLines = new ArrayList<>();
 		int numLocksAllowed = 0;
-		switch (getMode()) {
+		switch (mode) {
 		case FT -> numLocksAllowed = 1;
 		case FD -> numLocksAllowed = 0;
 		}
 		for (int i = -4; i <= 0; i++) {
 			Line line = new Line();
-			switch (getMode()) {
+			switch (mode) {
 			case FT -> numLocksAllowed = 1;
 			case FD -> numLocksAllowed = 0;
 			}
@@ -205,7 +205,7 @@ public class Grid implements Serializable {
 	}
 
 	public Grid copy() {
-		Grid copy = new Grid(width(), height(), getMode());
+		Grid copy = new Grid(width(), height(), mode);
 		for (int i = 0; i < width(); i++) {
 			for (int j = 0; j < height(); j++) {
 				if (grid[i][j] == null) continue;
@@ -236,9 +236,5 @@ public class Grid implements Serializable {
 
 	public List<Line> getLines() {
 		return lines;
-	}
-
-	public Mode getMode() {
-		return mode;
 	}
 }

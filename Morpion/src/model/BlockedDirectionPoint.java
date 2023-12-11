@@ -1,10 +1,9 @@
 package model;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BlockedDirectionPoint extends Point implements Serializable {
+public class BlockedDirectionPoint extends Point {
 	
     private static final long serialVersionUID = 1L;
 	private final Set<Direction> lockedDirections;
