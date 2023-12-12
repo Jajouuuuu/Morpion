@@ -6,9 +6,6 @@ import java.util.Random;
 import model.Grid;
 import model.Line;
 
-// Faire heriter de MorpioSolitaireModel ? et rajouter juste addadLines comme variable de classe ? 
-// Et meme addedLines est deja inclu dans grid car la variable lines est une liste donc on utilise la position.
-// Donc juste rajouter une variable aui dit a quelle position est la premiere ligne de la sinmulatioin en nmcs.
 
 public class NmcsState {
 	private Grid grid;

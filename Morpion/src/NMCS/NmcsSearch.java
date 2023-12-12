@@ -5,7 +5,6 @@ import model.Line;
 public class NmcsSearch { 
 	
 	public static NmcsState searchBestState(NmcsState state, final int level) {
-// Maybe change name of state to branch, because it a branch of exploration in the tree of possible moves
 
 		// terminating case, we do random moves until the end to get the score
 		if (level <= 0) {

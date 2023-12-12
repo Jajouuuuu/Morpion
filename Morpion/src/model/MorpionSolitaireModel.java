@@ -15,6 +15,7 @@ public class MorpionSolitaireModel {
 	private static final int GRID_WIDTH = 14;
 	private static final int GRID_HEIGHT = 14;
 	private Grid grid;
+
 	private boolean choixLigne;
 	private List<Line> lignesPossibles;
 	private final ArrayList<PlayObserver> playObs;
@@ -193,6 +194,10 @@ public class MorpionSolitaireModel {
 
 	public String getPlayerName() {
 		return player;
+	}
+	
+	public Grid getGrid() {
+		return grid;
 	}
 
 	public void undoMove() {
