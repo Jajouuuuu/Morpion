@@ -102,7 +102,7 @@ public class MorpionSolitaireModel {
 			}
 			System.out.println("Mouvement non valide.");
 			return;
-		}		
+		}
 		List<Line> possibleLines = grid.possibleLines(x, y);
 		if (possibleLines.size() == 0) {
 			System.out.println("Mouvement non valide.");
