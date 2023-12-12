@@ -12,22 +12,39 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.MorpionSolitaireModel;
 import model.Score;
 
+/**
+ * Contrôleur pour la gestion des meilleurs scores.
+ */
 public class MeilleursScoresController {
-    @FXML private TableView<Score> scoresTable;
-    @FXML private TableColumn<Score, String> usernameColumn;
-    @FXML private TableColumn<Score, Integer> scoreColumn;
-
+	
+    @FXML 
+    private TableView<Score> scoresTable;
+    @FXML 
+    private TableColumn<Score, String> usernameColumn;
+    @FXML 
+    private TableColumn<Score, Integer> scoreColumn;
     private MorpionSolitaireModel model;
     
+    /**
+     * Initialise le contrôleur.
+     */
     public void initialize() {
         System.out.println(model);
     }
     
+    /**
+     * Gère l'action du bouton de retour.
+     */
     @FXML
 	private void handleRetourButton() {
     	 App.getInstance().loadPreviousPage();
     }
 
+    /**
+     * Définit le modèle et initialise le contrôleur.
+     *
+     * @param model Modèle de Morpion Solitaire.
+     */
     public void setModelAndInitialize(MorpionSolitaireModel model) {
         this.model = model;
         System.out.println(this.model);

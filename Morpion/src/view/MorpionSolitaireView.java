@@ -16,8 +16,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * La classe MorpionSolitaireView représente la vue graphique du jeu Morpion Solitaire.
+ * Elle implémente l'interface PlayObserver pour recevoir les mises à jour du modèle de jeu.
+ */
 public class MorpionSolitaireView implements PlayObserver, Serializable  {
 
+	private static final long serialVersionUID = 1L;
 	private Canvas canva;
 	private static final int CELL_WIDTH = 25;
 	private static final int CELL_HEIGHT = 25;
@@ -30,6 +35,12 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 	private Parent root; 
 	private App app;
 
+	/**
+     * Construit un MorpionSolitaireView avec le canvas spécifié et l'application.
+     *
+     * @param canva Le canvas utilisé pour dessiner la grille de jeu.
+     * @param app   L'instance principale de l'application.
+     */
 	@SuppressWarnings("exports")
 	public MorpionSolitaireView(Canvas canva, App app) {
 		this.canva = canva;
@@ -40,6 +51,10 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 		this.app = app; 
 	}
 
+	/**
+     * Constructeur par défaut pour MorpionSolitaireView.
+     * Crée un nouveau canvas et initialise les listes des points et lignes joués.
+     */
 	public MorpionSolitaireView() {
 		this.canva = new Canvas();
 		this.playedPoints = new ArrayList<>();
@@ -48,10 +63,19 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 		canva.setHeight(HEIGHT);
 	}
 
+	 /**
+     * Définit le canvas utilisé par la vue.
+     *
+     * @param canva Le nouveau canvas.
+     */
+	@SuppressWarnings("exports")
 	public void setCanvas(Canvas canva) {
 		this.canva = canva;
 	}
 
+	/**
+     * Thème graphique par défaut utilisé pour l'affichage.
+     */
 	public static final Theme M_THEME = new Theme(
 			Color.web("#99c2ff"), 
 			Color.web("#19479D"), 
@@ -59,30 +83,65 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 			Color.web("#557AC3"),
 			Color.web("#7F8C8D"));
 
+	/**
+     * Obtient le thème graphique actuel utilisé pour l'affichage.
+     *
+     * @return Le thème actuel.
+     */
 	public Theme getTheme() {
 		return theme;
 	}
 
+	/**
+     * Définit le thème graphique utilisé pour l'affichage.
+     *
+     * @param theme Le nouveau thème à appliquer.
+     */
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
 
+	/**
+     * Obtient la coordonnée X du décalage pour le dessin.
+     *
+     * @return La coordonnée X du décalage.
+     */
 	public int getOffX() {
 		return x;
 	}
 
+	/**
+     * Obtient la coordonnée Y du décalage pour le dessin.
+     *
+     * @return La coordonnée Y du décalage.
+     */
 	public int getOffY() {
 		return y;
 	}
 
+	/**
+     * Obtient la largeur d'une cellule dans la grille.
+     *
+     * @return La largeur d'une cellule.
+     */
 	public int getCellWidth() {
 		return CELL_WIDTH;
 	}
 
+	 /**
+     * Obtient la hauteur d'une cellule dans la grille.
+     *
+     * @return La hauteur d'une cellule.
+     */
 	public int getCellHeight() {
 		return CELL_HEIGHT;
 	}
 
+	/**
+     * Calcule les dimensions du canvas en fonction de la largeur et de la hauteur de la grille.
+     *
+     * @param grid La grille de jeu actuelle.
+     */
 	public void calcDimensions(Grid grid) {
 		int width = grid.width() * CELL_WIDTH;
 		canva.setWidth(width);
@@ -90,6 +149,13 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 		canva.setHeight(height);
 	}
 
+	 /**
+     * Met à jour l'affichage en fonction de l'état actuel de la grille, des points et des lignes.
+     *
+     * @param grid            La grille de jeu actuelle.
+     * @param highlightPoints La liste des points à mettre en surbrillance.
+     * @param highlightLines  La liste des lignes à mettre en surbrillance.
+     */
 	public void update(Grid grid, List<Point> highlightPoints, List<Line> highlightLines) {
 		if (canva != null) {
 			GraphicsContext g = canva.getGraphicsContext2D();
@@ -145,26 +211,59 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 		}
 	}
 
+	/**
+	 * Définit l'application associée à cette vue.
+	 *
+	 * @param app L'application Morpion Solitaire.
+	 */
 	public void setApp(App app) {
 		this.app = app;
 	}
 
+	/**
+	 * Définit le nœud racine (root) de cette vue.
+	 *
+	 * @param root Le nœud racine de la vue.
+	 */
+	@SuppressWarnings("exports")
 	public void setRoot(Parent root) {
 		this.root = root;
 	}
 
+	/**
+	 * Applique une correction de demi-pixel à la coordonnée spécifiée.
+	 *
+	 * @param num La coordonnée à corriger.
+	 * @return La coordonnée corrigée.
+	 */
 	private double snap(double num) {
 		return num + 0.5;
 	}
 
+	/**
+	 * Obtient la liste des points joués.
+	 *
+	 * @return La liste des points joués.
+	 */
 	public List<Point> getPlayedPoints() {
 		return playedPoints;
 	}
 
+	/**
+	 * Obtient la liste des lignes jouées.
+	 *
+	 * @return La liste des lignes jouées.
+	 */
 	public List<Line> getPlayedLines() {
 		return playedLines;
 	}
 
+	/**
+	 * Dessine une ligne sur le canvas graphique.
+	 *
+	 * @param line La ligne à dessiner.
+	 * @param g    Le contexte graphique.
+	 */
 	private void drawLine(Line line, GraphicsContext g) {
 		g.setLineWidth(2);
 		Point p1 = line.points().get(0);
@@ -172,6 +271,13 @@ public class MorpionSolitaireView implements PlayObserver, Serializable  {
 		g.strokeLine(x + CELL_HEIGHT * p1.x, y + CELL_HEIGHT * p1.y, x + CELL_WIDTH * p2.x, y + CELL_HEIGHT * p2.y);
 	}
 
+	/**
+	 * Dessine un point numéroté sur le canvas graphique.
+	 *
+	 * @param p   Le point à dessiner.
+	 * @param num Le numéro du point.
+	 * @param g   Le contexte graphique.
+	 */
 	private void drawNumberedPoint(Point p, int num, GraphicsContext g) {
 		double radius = 10;
 		double centerX = x + CELL_HEIGHT * p.x - radius;

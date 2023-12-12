@@ -8,7 +8,6 @@ import app.App;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -24,6 +23,9 @@ import model.MorpionSolitaireModel;
 import model.SauvegardeGrille;
 import view.MorpionSolitaireView;
 
+/**
+ * Contrôleur pour la gestion du jeu Morpion Solitaire.
+ */
 public class MorpionSolitaireController {
 
 	@FXML
@@ -31,15 +33,16 @@ public class MorpionSolitaireController {
 	private MorpionSolitaireView view;
 	private MorpionSolitaireModel model;
 	@FXML
-
 	private App app;
 	@FXML
 	private TextField user;
 	@FXML
 	private ComboBox<String> mode;
-
 	private boolean isInitialization = true;
 
+	/**
+	 * Initialise le contrôleur.
+	 */
 	@FXML
 	private void initialize() {
 		mode.valueProperty().addListener(new ChangeListener<String>() {
@@ -51,14 +54,24 @@ public class MorpionSolitaireController {
 			}
 		});
 		view = new MorpionSolitaireView(canvaJeu, app);
-        view.setRoot(canvaJeu.getParent());
-        view.setApp(app);
+		view.setRoot(canvaJeu.getParent());
+		view.setApp(app);
 	}
 
+	/**
+	 * Définit l'application principale.
+	 *
+	 * @param app Application principale.
+	 */
 	public void setApp(App app) {
 		this.app = app;
 	}
 
+	/**
+	 * Gère l'action du clic sur le canvas.
+	 *
+	 * @param me MouseEvent généré lors du clic.
+	 */
 	@FXML
 	private void canvasMousePressed(MouseEvent me) {
 		System.out.printf("(%f,%f)", me.getX(), me.getY());
@@ -73,12 +86,13 @@ public class MorpionSolitaireController {
 		}
 		int gridX = (int) Math.round(tempX);
 		int gridY = (int) Math.round(tempY);
-
 		model.handleHumanMove(gridX, gridY);
 		checkGameOver();
-
 	}
 
+	/**
+	 * Initialise le jeu.
+	 */
 	public void start() {
 		System.out.println("Contrôleur MorpionSolitaire initialisé.");
 		view = new MorpionSolitaireView(canvaJeu, app);
@@ -91,6 +105,9 @@ public class MorpionSolitaireController {
 		model.init();
 	}
 
+	/**
+	 * Configure les options du jeu.
+	 */
 	private void setupOptions() {
 		view.setTheme(MorpionSolitaireView.M_THEME);
 		mode.getItems().removeAll(mode.getItems());
@@ -98,6 +115,9 @@ public class MorpionSolitaireController {
 		mode.getSelectionModel().select("5D");
 	}
 
+	/**
+	 * Gère l'action du bouton de réinitialisation.
+	 */
 	@FXML
 	private void reset() {
 		String selectedMode = this.mode.getSelectionModel().getSelectedItem();
@@ -107,11 +127,17 @@ public class MorpionSolitaireController {
 		}
 	}
 
+	/**
+	 * Gère l'action du bouton d'annulation de coup.
+	 */
 	@FXML
 	private void undoMove() {
 		model.undoMove();
 	}
 
+	/**
+	 * Gère le changement de mode de jeu.
+	 */
 	@FXML
 	private void gameModeChanged() {
 		Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -130,6 +156,9 @@ public class MorpionSolitaireController {
 		}
 	}
 
+	/**
+	 * Gère l'action de déconnexion.
+	 */
 	@FXML
 	private void deconnexion() {
 		Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -149,7 +178,9 @@ public class MorpionSolitaireController {
 		}
 	}
 
-
+	/**
+	 * Gère l'action de sauvegarde de la partie.
+	 */
 	@FXML
 	private void sauvegarderPartie() {
 		FileChooser fileChooser = new FileChooser();
@@ -170,6 +201,9 @@ public class MorpionSolitaireController {
 		}
 	}
 
+	/**
+	 * Gère l'action de chargement de la partie.
+	 */
 	@FXML
 	private void chargerPartie() {
 		FileChooser fileChooser = new FileChooser();
@@ -192,12 +226,21 @@ public class MorpionSolitaireController {
 		}
 	}
 
+	/**
+	 * Gère l'action d'affichage des meilleurs scores.
+	 *
+	 * @throws IOException En cas d'erreur d'entrée/sortie.
+	 */
 	@FXML
 	private void mesMeilleursScores() throws IOException {
-	   app.loadMeilleursScoresPage();
+		app.loadMeilleursScoresPage();
 	}
 
-	@FXML private void consulterInfos() {
+	/**
+	 * Gère l'action de consultation des informations du joueur.
+	 */
+	@FXML 
+	private void consulterInfos() {
 		String username = model.getPlayerName();
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Informations du joueur");
@@ -206,41 +249,61 @@ public class MorpionSolitaireController {
 		alert.showAndWait();
 	}
 
-	@FXML private void changerInfos() {
+	/**
+	 * Gère l'action de modification des informations du joueur.
+	 */
+	@FXML 
+	private void changerInfos() {
 
 	}
 
+	/**
+	 * Définit le modèle du jeu.
+	 *
+	 * @param model Modèle de Morpion Solitaire.
+	 */
 	public void setModel(MorpionSolitaireModel model) {
 		this.model = model;
 	}
 
+	/**
+	 * Définit le modèle et la vue du jeu.
+	 *
+	 * @param model Modèle de Morpion Solitaire.
+	 * @param view  Vue de Morpion Solitaire.
+	 */
 	public void setModelAndView(MorpionSolitaireModel model, MorpionSolitaireView view) {
 		this.model = model;
 		this.view = view;
 	}
-	
-	private void checkGameOver() {
-        if (model.isGameOver()) {
-            int finalScore = model.getScore();
 
-            Alert gameOverAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            gameOverAlert.setTitle("Fin de partie");
-            gameOverAlert.setHeaderText("Vous avez fini avec un score de " + finalScore);
-            gameOverAlert.setContentText("Que souhaitez-vous faire?");
-            ButtonType deconnecterButton = new ButtonType("Se déconnecter", ButtonBar.ButtonData.OK_DONE);
-            ButtonType recommencerButton = new ButtonType("Recommencer", ButtonBar.ButtonData.APPLY);
-            gameOverAlert.getButtonTypes().setAll(deconnecterButton, recommencerButton);
-            gameOverAlert.initModality(Modality.APPLICATION_MODAL);
-            gameOverAlert.showAndWait().ifPresent(response -> {
-                if (response == deconnecterButton) {
-                    deconnexion();
-                } else if (response == recommencerButton) {
-                    model.init();
-                    
-                }
-            });
-        }
-    }
+	/**
+	 * Obtient le canvas du jeu.
+	 *
+	 * @return Canvas du jeu.
+	 */
+	private void checkGameOver() {
+		if (model.isGameOver()) {
+			int finalScore = model.getScore();
+
+			Alert gameOverAlert = new Alert(Alert.AlertType.CONFIRMATION);
+			gameOverAlert.setTitle("Fin de partie");
+			gameOverAlert.setHeaderText("Vous avez fini avec un score de " + finalScore);
+			gameOverAlert.setContentText("Que souhaitez-vous faire?");
+			ButtonType deconnecterButton = new ButtonType("Se déconnecter", ButtonBar.ButtonData.OK_DONE);
+			ButtonType recommencerButton = new ButtonType("Recommencer", ButtonBar.ButtonData.APPLY);
+			gameOverAlert.getButtonTypes().setAll(deconnecterButton, recommencerButton);
+			gameOverAlert.initModality(Modality.APPLICATION_MODAL);
+			gameOverAlert.showAndWait().ifPresent(response -> {
+				if (response == deconnecterButton) {
+					deconnexion();
+				} else if (response == recommencerButton) {
+					model.init();
+
+				}
+			});
+		}
+	}
 
 	@SuppressWarnings("exports")
 	public Canvas getCanvas() {

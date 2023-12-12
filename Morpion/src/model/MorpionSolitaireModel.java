@@ -12,6 +12,11 @@ import NMCS.NmcsSearch;
 import NMCS.NmcsState;
 import controler.ConnexionController;
 
+/**
+ * Classe représentant le modèle d'un jeu de morpion solitaire.
+ * Cette classe gère l'état du jeu, les mouvements des joueurs, les observateurs, etc.
+ *
+ */
 public class MorpionSolitaireModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,7 +33,12 @@ public class MorpionSolitaireModel implements Serializable {
 	private List<Line> playedLines;
 	private User user;
 	private ConnexionController connexionController;
+	private boolean hintVisible;
 
+	/**
+     * Constructeur par défaut de la classe MorpionSolitaireModel.
+     * Initialise les observateurs et appelle la méthode d'initialisation.
+     */
 	public MorpionSolitaireModel() {
 		this.playObs = new ArrayList<>();
 		this.scoreObs = new ArrayList<>();
@@ -37,15 +47,28 @@ public class MorpionSolitaireModel implements Serializable {
 		init();
 	}
 
+	/**
+     * Définit le contrôleur de connexion pour la gestion des connexions.
+     *
+     * @param connexionController Le contrôleur de connexion
+     */
 	public void setConnexionController(ConnexionController connexionController) {
         this.connexionController = connexionController;
     }
+	
+	/**
+     * Vérifie si le jeu est terminé.
+     *
+     * @return true si le jeu est terminé, sinon false
+     */
 	public boolean isGameOver() {
 		System.out.println(gameOver);
 		return gameOver;
 	}
 
-	private boolean hintVisible;
+	/**
+	 * Met à jour les observateurs du jeu en fournissant les points, les lignes possibles et les lignes d'indice.
+	 */
 	public void updateObservers() {
 		List<Point> points = new ArrayList<>();
 		for (Line line : lignesPossibles) {
@@ -66,14 +89,28 @@ public class MorpionSolitaireModel implements Serializable {
 		scoreObs.forEach(scoreObserver -> scoreObserver.updateScore(getScore()));
 	}
 
+	/**
+	 * Ajoute un observateur de jeu à la liste des observateurs de jeu.
+	 *
+	 * @param gameObserver L'observateur de jeu à ajouter
+	 */
 	public void addGameObserver(PlayObserver gameObserver) {
 		playObs.add(gameObserver);
 	}
 
+	/**
+	 * Ajoute un observateur de score à la liste des observateurs de score.
+	 *
+	 * @param scoreObserver L'observateur de score à ajouter
+	 */
 	public void addScoreObserver(ScoreObserver scoreObserver) {
 		scoreObs.add(scoreObserver);
 	}
 
+	/**
+	 * Initialise le jeu en créant une nouvelle grille, en définissant l'état initial du jeu
+	 * et en récupérant le nom du joueur à partir du contrôleur de connexion si disponible.
+	 */
 	public void init() {
 	    grid = new Grid(GRID_WIDTH, GRID_HEIGHT, Mode.FD);
 	    grid.init();
@@ -88,10 +125,19 @@ public class MorpionSolitaireModel implements Serializable {
 	    }
 	}
 
+	/**
+	 * Obtient le mode de jeu actuel de la grille.
+	 *
+	 * @return Le mode de jeu de la grille
+	 */
 	public Mode getGameMode() {
 		return grid.getMode();
 	}
 
+	/**
+	 * Gère le cas où le jeu est terminé.
+	 * Affiche un message, met à jour les observateurs et sauvegarde le score.
+	 */
 	private void gameOver() {
 		System.out.println("Partie finie.");
 		updateObservers();
@@ -99,6 +145,12 @@ public class MorpionSolitaireModel implements Serializable {
 		gameOver = true;
 	}
 
+	/**
+	 * Vérifie le score actuel du joueur et le sauvegarde.
+	 * Si le nom du joueur est nul, utilise le nom d'utilisateur de l'utilisateur enregistré.
+	 *
+	 * @throws RuntimeException Si une erreur survient lors de la sauvegarde du score
+	 */
 	private void checkAndSaveScore() {
 		if (player == null) {
 			player = user.getUsername();
@@ -110,6 +162,12 @@ public class MorpionSolitaireModel implements Serializable {
 		}
 	}
 
+	/**
+     * Gère le mouvement effectué par un joueur humain aux coordonnées spécifiées.
+     *
+     * @param x La coordonnée x du mouvement
+     * @param y La coordonnée y du mouvement
+     */
 	public void handleHumanMove(int x, int y) {
 		if (choixLigne) {
 			for (Line line : lignesPossibles) {
@@ -141,6 +199,13 @@ public class MorpionSolitaireModel implements Serializable {
 		playedPoints.add(new Point(x, y));
 	}
 
+	/**
+	 * Obtient les meilleurs scores, classés par ordre décroissant.
+	 *
+	 * @param count Le nombre de meilleurs scores à retourner
+	 * @return Une liste contenant les meilleurs scores
+	 * @throws RuntimeException Si une erreur survient lors du chargement des scores
+	 */
 	public List<Score> getTopScores(int count) {
 	    List<Score> topScores;
 	    try {
@@ -154,6 +219,9 @@ public class MorpionSolitaireModel implements Serializable {
 	    return topScores;
 	}
 	
+	/**
+	 * Gère un mouvement aléatoire dans le jeu.
+	 */
 	public void handleRandomMove() {
 		Random rd = new Random(); 
 		List<Line> possibleLines = grid.possibleLines();
@@ -167,6 +235,9 @@ public class MorpionSolitaireModel implements Serializable {
 		}
 	}
 
+	/**
+	 * Gère un jeu aléatoire jusqu'à la fin.
+	 */
 	public void handleRandomGame() {
 		while (!gameOver) {
 			handleRandomMove();
@@ -174,22 +245,45 @@ public class MorpionSolitaireModel implements Serializable {
 		}
 	}
 
+	/**
+	 * Obtient la liste des points joués.
+	 *
+	 * @return La liste des points joués
+	 */
 	public List<Point> getPlayedPoints() {
 		return playedPoints;
 	}
 
+	/**
+	 * Définit la liste des points joués.
+	 *
+	 * @param playedPoints La nouvelle liste des points joués
+	 */
 	public void setPlayedPoints(List<Point> playedPoints) {
 		this.playedPoints = playedPoints;
 	}
 
+	/**
+	 * Obtient la liste des lignes jouées.
+	 *
+	 * @return La liste des lignes jouées
+	 */
 	public List<Line> getPlayedLines() {
 		return playedLines;
 	}
 
+	/**
+	 * Définit la liste des lignes jouées.
+	 *
+	 * @param playedLines La nouvelle liste des lignes jouées
+	 */
 	public void setPlayedLines(List<Line> playedLines) {
 		this.playedLines = playedLines;
 	}
 
+	/**
+	 * Gère un mouvement effectué par l'algorithme NMCS (Nested Monte Carlo Search).
+	 */
 	public void handleNmcsMove() {
 		int level = 1;
 		NmcsState state = new NmcsState(this.grid);
@@ -200,6 +294,9 @@ public class MorpionSolitaireModel implements Serializable {
 		checkGameOver();
 	}
 
+	/**
+	 * Gère un jeu complet en utilisant l'algorithme NMCS (Nested Monte Carlo Search).
+	 */
 	public void handleNmcsGame() {
 		while (!gameOver) {
 			handleNmcsMove();
@@ -207,6 +304,10 @@ public class MorpionSolitaireModel implements Serializable {
 		}
 	}
 
+	/**
+	 * Vérifie si le jeu est terminé en parcourant la grille et en cherchant les lignes possibles.
+	 * Met à jour l'état du jeu en conséquence.
+	 */
 	private void checkGameOver() {
 		HashSet<Point> pointsSoFar = new HashSet<>();
 		List<Line> possibleLines = new ArrayList<>();
@@ -225,6 +326,12 @@ public class MorpionSolitaireModel implements Serializable {
 		gameOver();
 	}
 
+	/**
+	 * Effectue un mouvement en ajoutant une ligne à la grille.
+	 * Nettoie la liste des lignes possibles et met à jour les observateurs.
+	 *
+	 * @param line La ligne à ajouter
+	 */
 	private void makeMove(Line line) {
 		grid.addLine(line);
 		lignesPossibles.clear();
@@ -232,22 +339,45 @@ public class MorpionSolitaireModel implements Serializable {
 		playedLines.add(line);
 	}
 
+	/**
+	 * Définit le mode de jeu de la grille.
+	 *
+	 * @param mode Le mode de jeu à définir
+	 */
 	public void setGameMode(Mode mode) {
 		this.grid.setMode(mode);
 	}
 
+	/**
+     * Obtient le score actuel du jeu.
+     *
+     * @return Le score du jeu
+     */
 	public int getScore() {
 		return grid.lines().size();
 	}
 
+	/**
+	 * Définit le nom du joueur.
+	 *
+	 * @param playerName Le nouveau nom du joueur
+	 */
 	public void setPlayerName(String playerName) {
 		this.player = playerName;
 	}
 
+	/**
+	 * Obtient le nom actuel du joueur.
+	 *
+	 * @return Le nom du joueur
+	 */
 	public String getPlayerName() {
 		return player;
 	}
 
+	/**
+     * Annule le dernier mouvement effectué dans le jeu.
+     */
 	public void undoMove() {
 		if (grid.lines().size() < 1)
 			return;
@@ -256,10 +386,20 @@ public class MorpionSolitaireModel implements Serializable {
 		updateObservers();
 	}
 
+	/**
+     * Obtient la grille actuelle du jeu.
+     *
+     * @return La grille du jeu
+     */
 	public Grid getGrid() {
 		return grid;
 	}
 
+	/**
+     * Définit la grille du jeu en utilisant une grille chargée.
+     *
+     * @param loadedGrid La grille chargée
+     */
 	public void setGrid(Grid loadedGrid) {
 		this.grid = loadedGrid;
 	}

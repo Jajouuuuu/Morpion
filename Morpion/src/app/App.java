@@ -17,6 +17,9 @@ import view.MorpionSolitaireView;
 import java.io.IOException;
 import java.util.Stack;
 
+/**
+ * Classe principale de l'application qui étend la classe Application de JavaFX.
+ */
 public class App extends Application {
 
 	private Stage primaryStage;
@@ -24,6 +27,13 @@ public class App extends Application {
 	private MorpionSolitaireModel model;
 	private Stack<Parent> pageHistory = new Stack<>();
 
+	/**
+     * Méthode principale appelée au lancement de l'application.
+     *
+     * @param primaryStage Stage principal de l'application.
+     * @throws Exception Exception levée en cas d'erreur lors du lancement.
+     */
+    @SuppressWarnings("exports")
 	@Override
     public void start(Stage primaryStage) throws Exception {
         instance = this;
@@ -32,6 +42,9 @@ public class App extends Application {
         loadLoginPage();
     }
 
+    /**
+     * Charge la page de connexion.
+     */
 	public void loadLoginPage() {
 		try {
 			FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/Connexion.fxml"));
@@ -63,6 +76,12 @@ public class App extends Application {
 		}
 	}
 
+	/**
+     * Charge la page du jeu Morpion Solitaire.
+     *
+     * @param username             Nom d'utilisateur du joueur.
+     * @param connexionController Contrôleur de connexion.
+     */
 	public void loadMorpionSolitairePage(String username, ConnexionController connexionController) {
 		System.out.println("Chargement de la page MorpionSolitaire");
 		System.out.println(username);
@@ -89,7 +108,9 @@ public class App extends Application {
 		}
 	}
 
-
+	/**
+     * Charge la page des meilleurs scores.
+     */
 	public void loadMeilleursScoresPage() {
 		System.out.println("Chargement de meilleurs scores");
 		try {
@@ -108,7 +129,10 @@ public class App extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+     * Charge la page précédente dans l'historique.
+     */
 	public void loadPreviousPage() {
 	    if (!pageHistory.isEmpty()) {
 	        Parent previousPage = pageHistory.pop();
@@ -124,21 +148,9 @@ public class App extends Application {
 	    }
 	}
 
-
-
-	private void loadPage(String fxmlPath) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-			Parent root = loader.load();
-			Scene scene = new Scene(root);
-
-			getPrimaryStage().setScene(scene);
-			getPrimaryStage().show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+	/**
+     * Charge la page du premier login.
+     */
 	public void loadFirstLoginPage() {
 		try {
 			FXMLLoader firstLoginLoader = new FXMLLoader(getClass().getResource("/FirstLogin.fxml"));
@@ -155,28 +167,61 @@ public class App extends Application {
 		}
 	}
 
+	/**
+     * Méthode principale pour le lancement de l'application.
+     *
+     * @param args Arguments de la ligne de commande.
+     */
 	public static void main(String[] args) {
 		launch(args);
 	}
 
+	/**
+     * Obtient l'instance unique de la classe App.
+     *
+     * @return Instance unique de la classe App.
+     */
 	public static App getInstance() {
         return instance;
     }
 
+	/**
+     * Obtient l'historique des pages.
+     *
+     * @return Historique des pages.
+     */
+	@SuppressWarnings("exports")
 	public Stack<Parent> getPageHistory() {
 		return pageHistory;
 	}
 
+	/**
+     * Définit l'historique des pages.
+     *
+     * @param pageHistory Historique des pages à définir.
+     */
+	@SuppressWarnings("exports")
 	public void setPageHistory(Stack<Parent> pageHistory) {
 		this.pageHistory = pageHistory;
 	}
 
+	/**
+     * Obtient le stage principal de l'application.
+     *
+     * @return Stage principal de l'application.
+     */
+	@SuppressWarnings("exports")
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
 
+	/**
+     * Définit le stage principal de l'application.
+     *
+     * @param primaryStage Stage principal de l'application à définir.
+     */
+	@SuppressWarnings("exports")
 	public void setPrimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
-
 }

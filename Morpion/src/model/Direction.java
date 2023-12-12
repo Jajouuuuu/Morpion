@@ -1,7 +1,26 @@
 package model;
 
+/**
+ * Énumération représentant les différentes directions possibles.
+ * Les directions incluent HORIZONTAL, VERTICAL, DOWN et UP.
+ */
 public enum Direction {
 	
-    HORIZONTAL, VERTICAL, DOWN, UP
+	/**
+     * Direction horizontale.
+     */
+    HORIZONTAL, 
+    /**
+     * Direction verticale.
+     */
+    VERTICAL, 
+    /**
+     * Direction vers le bas.
+     */
+    DOWN, 
+    /**
+     * Direction vers le haut.
+     */
+    UP
     
 }
