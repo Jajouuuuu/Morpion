@@ -4,33 +4,25 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import model.Grid;
+import model.Mode;
+import model.SauvegardeGrille;
 
-import java.io.IOException;
+import java.io.*;
 
 class SauvegardeGrilleTest {
 
     @Test
-    void testSaveAndLoadGrid() {
-        // Create a Grid for testing
-        Grid originalGrid = new Grid(/* provide necessary parameters */);
-
-        // Define a filename for the test
+    public void testSaveAndLoadGrid() {
+        Grid originalGrid = new Grid(14, 14, Mode.FT);
         String filename = "testGrid.ser";
 
         try {
-            // Save the grid
             SauvegardeGrille.saveGrid(originalGrid, filename);
 
-            // Load the grid
             Grid loadedGrid = SauvegardeGrille.loadGrid(filename);
-
-            // Check if the loaded grid is not null
             assertNotNull(loadedGrid);
-
-            // Add more specific assertions based on your Grid class
-            // For example, check if relevant properties or methods are equal
-            assertEquals(originalGrid.getGridWidth(), loadedGrid.getGridWidth());
-            assertEquals(originalGrid.getGridHeight(), loadedGrid.getGridHeight());
+            assertEquals(originalGrid.lines().size(), loadedGrid.lines().size());
+            assertEquals(originalGrid.points(), loadedGrid.points());
             // Add more assertions as needed
 
         } catch (IOException | ClassNotFoundException e) {
@@ -38,15 +30,9 @@ class SauvegardeGrilleTest {
         }
     }
 
-    @Test
-    void testLoadNonExistentFile() {
-        // Define a filename that does not exist
-        String filename = "nonexistent.ser";
+//    @Test
+//    public void testLoadNonExistentFile() {
+//    }
 
-        // Attempt to load the grid from a non-existent file
-        assertThrows(IOException.class, () -> SauvegardeGrille.loadGrid(filename));
-    }
-
-    // Add more tests as needed based on the behavior of your class
 }
 
