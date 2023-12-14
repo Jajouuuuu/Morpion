@@ -1,8 +1,13 @@
- package app;
+package app;
 
+
+import controler.ConnexionController;
+import controler.FirstLoginController;
+import controler.MeilleursScoresController;
+import controler.MorpionSolitaireController;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -10,40 +15,13 @@ import model.MorpionSolitaireModel;
 import view.MorpionSolitaireView;
 
 import java.io.IOException;
-<<<<<<< HEAD
-import java.net.URL;
-
-import controler.MorpionSolitaireController;
-=======
 import java.util.Stack;
->>>>>>> refs/remotes/Morpion/dev/jaj
 
 /**
  * Classe principale de l'application qui étend la classe Application de JavaFX.
  */
 public class App extends Application {
-		@SuppressWarnings("exports")
-		@FXML
-	    @Override
-	    public void start(Stage stage) throws IOException {
-			URL url = getClass().getResource("/MorpionSolitaire.fxml");
-			if (url != null) {
-				FXMLLoader fxmlLoader = new FXMLLoader(url);
-		        Scene scene = new Scene(fxmlLoader.load(), MorpionSolitaireView.WIDTH, MorpionSolitaireView.HEIGHT);
-		        MorpionSolitaireController controller = fxmlLoader.getController();
 
-<<<<<<< HEAD
-		        MorpionSolitaireModel gameModel = new MorpionSolitaireModel();
-		        controller.setModel(gameModel);
-		        controller.start();
-		        stage.setTitle("Morpion Solitaire");
-		        stage.setScene(scene);
-		        stage.setOnCloseRequest(e -> System.exit(0));
-		        stage.show();
-			} else {
-			   System.err.println("Le fichier FXML n'a pas été trouvé.");
-			}        
-=======
 	private Stage primaryStage;
 	private static App instance;
 	private MorpionSolitaireModel model;
@@ -167,15 +145,9 @@ public class App extends Application {
 	        primaryStage.show();
 	    } else {
 	        System.out.println("No previous page in history.");
->>>>>>> refs/remotes/Morpion/dev/jaj
-	    }
-
-<<<<<<< HEAD
-	    public static void main(String[] args) {
-	        launch();
 	    }
 	}
-=======
+
 	/**
      * Charge la page du premier login.
      */
@@ -253,4 +225,3 @@ public class App extends Application {
 		this.primaryStage = primaryStage;
 	}
 }
->>>>>>> refs/remotes/Morpion/dev/jaj

@@ -19,10 +19,6 @@ public class Line implements Serializable {
     public Line() {
         points = new ArrayList<>();
     }
-<<<<<<< HEAD
-
-    public Line(Collection<Point> points, Direction direction) {
-=======
     
     /**
 	 * Constructeur avec une collection de points.
@@ -41,7 +37,6 @@ public class Line implements Serializable {
 	 * @param direction  Direction de la ligne.
 	 */
 	public Line(Collection<Point> points, Direction direction) {
->>>>>>> refs/remotes/Morpion/dev/jaj
         this.points = new ArrayList<>();
         this.points.addAll(points);
         this.direction = direction;

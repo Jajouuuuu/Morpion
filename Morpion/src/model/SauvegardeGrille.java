@@ -1,10 +1,8 @@
 package model;
 
 import java.io.*;
+import java.util.List;
 
-<<<<<<< HEAD
-public class SauvegardeGrille {
-=======
 /**
  * La classe SauvegardeGrille permet de sauvegarder et charger l'état d'une grille de jeu.
  */
@@ -14,17 +12,7 @@ public class SauvegardeGrille implements Serializable {
 	private Grid grid;
     private List<Point> playedPoints;
     private List<Line> playedLines;
->>>>>>> refs/remotes/Morpion/dev/jaj
 
-<<<<<<< HEAD
-    public static void saveGrid(Grid grid, String filename) throws IOException {
-        FileOutputStream file = new FileOutputStream(filename);
-        ObjectOutputStream out = new ObjectOutputStream(file);
-        out.writeObject(grid);
-        out.close();
-        file.close();
-        System.out.println("La grille a été sérialisé.");
-=======
     /**
      * Constructeur pour créer un objet SauvegardeGrille avec une grille, une liste de points joués,
      * et une liste de lignes jouées.
@@ -37,18 +25,8 @@ public class SauvegardeGrille implements Serializable {
         this.grid = grid;
         this.playedPoints = playedPoints;
         this.playedLines = playedLines;
->>>>>>> refs/remotes/Morpion/dev/jaj
     }
 
-<<<<<<< HEAD
-    public static Grid loadGrid(String filename) throws IOException, ClassNotFoundException {
-        FileInputStream file = new FileInputStream(filename);
-        ObjectInputStream in = new ObjectInputStream(file);
-        Grid grid = (Grid) in.readObject();
-        in.close();
-        file.close();
-        System.out.println("La grille a été désérialisé.");
-=======
     /**
      * Sauvegarde l'objet SauvegardeGrille dans un fichier spécifié.
      *
@@ -87,11 +65,8 @@ public class SauvegardeGrille implements Serializable {
      * @return La grille associée à cette sauvegarde.
      */
     public Grid getGrid() {
->>>>>>> refs/remotes/Morpion/dev/jaj
         return grid;
     }
-<<<<<<< HEAD
-=======
 
     /**
      * Retourne la liste des points joués.
@@ -110,5 +85,4 @@ public class SauvegardeGrille implements Serializable {
     public List<Line> getPlayedLines() {
         return playedLines;
     }
->>>>>>> refs/remotes/Morpion/dev/jaj
 }

@@ -1,9 +1,5 @@
 package model;
 
-<<<<<<< HEAD
-public enum Mode {
-	
-=======
 import java.io.Serializable;
 
 /**
@@ -13,6 +9,5 @@ import java.io.Serializable;
  */
 public enum Mode implements Serializable {
     
->>>>>>> refs/remotes/Morpion/dev/jaj
     FT, FD
 }

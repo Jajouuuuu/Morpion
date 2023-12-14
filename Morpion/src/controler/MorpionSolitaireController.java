@@ -1,49 +1,49 @@
 package controler;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
+
+import app.App;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-<<<<<<< HEAD
-=======
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
->>>>>>> refs/remotes/Morpion/dev/jaj
 import model.Mode;
 import model.MorpionSolitaireModel;
+import model.SauvegardeGrille;
 import view.MorpionSolitaireView;
 
 /**
  * Contrôleur pour la gestion du jeu Morpion Solitaire.
  */
 public class MorpionSolitaireController {
-	
+
 	@FXML
 	private Canvas canvaJeu;
 	private MorpionSolitaireView view;
 	private MorpionSolitaireModel model;
 	@FXML
-<<<<<<< HEAD
-=======
 	private App app;
 	@FXML
->>>>>>> refs/remotes/Morpion/dev/jaj
 	private TextField user;
 	@FXML
 	private ComboBox<String> mode;
-<<<<<<< HEAD
-=======
 	private boolean isInitialization = true;
 
 	/**
 	 * Initialise le contrôleur.
 	 */
->>>>>>> refs/remotes/Morpion/dev/jaj
 	@FXML
-<<<<<<< HEAD
-    private ComboBox<String> theme;
-=======
 	private void initialize() {
 		mode.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -66,7 +66,6 @@ public class MorpionSolitaireController {
 	public void setApp(App app) {
 		this.app = app;
 	}
->>>>>>> refs/remotes/Morpion/dev/jaj
 
 	/**
 	 * Gère l'action du clic sur le canvas.
@@ -87,45 +86,30 @@ public class MorpionSolitaireController {
 		}
 		int gridX = (int) Math.round(tempX);
 		int gridY = (int) Math.round(tempY);
-<<<<<<< HEAD
-		if (gridX == -1 && gridY == -1) {
-			model.handleNmcsGame();
-		}
-		else { 
-			model.handleHumanMove(gridX, gridY);
-		}
-=======
 		model.handleHumanMove(gridX, gridY);
 		checkGameOver();
->>>>>>> refs/remotes/Morpion/dev/jaj
 	}
 
 	/**
 	 * Initialise le jeu.
 	 */
 	public void start() {
-<<<<<<< HEAD
-		view = new MorpionSolitaireView(canvaJeu);
-=======
 		System.out.println("Contrôleur MorpionSolitaire initialisé.");
 		view = new MorpionSolitaireView(canvaJeu, app);
->>>>>>> refs/remotes/Morpion/dev/jaj
 		canvaJeu.setFocusTraversable(true);
 		model.addGameObserver(view);
+		view.setTheme(MorpionSolitaireView.M_THEME);
+		canvaJeu.getScene().getRoot().setStyle("-fx-base:  #cce6ff");
 		setupOptions();
-		reset();
+		isInitialization = false;
+		model.init();
 	}
-<<<<<<< HEAD
-	
-=======
 
 	/**
 	 * Configure les options du jeu.
 	 */
->>>>>>> refs/remotes/Morpion/dev/jaj
 	private void setupOptions() {
 		view.setTheme(MorpionSolitaireView.M_THEME);
-		theme.getParent().getScene().getRoot().setStyle("-fx-base: #0d3d00");
 		mode.getItems().removeAll(mode.getItems());
 		mode.getItems().addAll("5T", "5D");
 		mode.getSelectionModel().select("5D");
@@ -136,9 +120,11 @@ public class MorpionSolitaireController {
 	 */
 	@FXML
 	private void reset() {
-		model.init();
-		Mode mode = this.mode.getSelectionModel().getSelectedItem().equalsIgnoreCase("5T") ? Mode.FT : Mode.FD;
-		model.setGameMode(mode);
+		String selectedMode = this.mode.getSelectionModel().getSelectedItem();
+		if (selectedMode != null) {
+			Mode mode = selectedMode.equalsIgnoreCase("5T") ? Mode.FT : Mode.FD;
+			model.setGameMode(mode);
+		}
 	}
 
 	/**
@@ -154,10 +140,6 @@ public class MorpionSolitaireController {
 	 */
 	@FXML
 	private void gameModeChanged() {
-<<<<<<< HEAD
-		Mode mode = this.mode.getSelectionModel().getSelectedItem().equalsIgnoreCase("5T") ? Mode.FT : Mode.FD;
-		model.setGameMode(mode);
-=======
 		Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
 		confirmationAlert.setTitle("Confirmation");
 		confirmationAlert.setHeaderText("Changement de mode de jeu");
@@ -273,7 +255,6 @@ public class MorpionSolitaireController {
 	@FXML 
 	private void changerInfos() {
 
->>>>>>> refs/remotes/Morpion/dev/jaj
 	}
 
 	/**
@@ -284,8 +265,6 @@ public class MorpionSolitaireController {
 	public void setModel(MorpionSolitaireModel model) {
 		this.model = model;
 	}
-<<<<<<< HEAD
-=======
 
 	/**
 	 * Définit le modèle et la vue du jeu.
@@ -350,5 +329,4 @@ public class MorpionSolitaireController {
 	private void handleRandomPartieButton() {
 		this.model.handleRandomGame();
 	}
->>>>>>> refs/remotes/Morpion/dev/jaj
 }

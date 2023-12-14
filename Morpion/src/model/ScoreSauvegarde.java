@@ -9,7 +9,7 @@ import java.util.List;
  * La classe ScoreSauvegarde offre des méthodes pour la sauvegarde et le chargement des scores.
  */
 public class ScoreSauvegarde {
-	
+
     private static final String scorePath = "resultats.csv";
 
     /**
@@ -30,11 +30,7 @@ public class ScoreSauvegarde {
                 int x = line.indexOf(',');
                 String name = line.substring(0, x);
                 double score = Double.parseDouble(line.substring(x + 1));
-<<<<<<< HEAD
-                Score scoreEntry = new Score(name, score);
-=======
                 Score scoreEntry = new Score(name, (int) score);
->>>>>>> refs/remotes/Morpion/dev/jaj
                 scoresList.add(scoreEntry);
             }
         } catch (NumberFormatException e) {
@@ -66,10 +62,10 @@ public class ScoreSauvegarde {
     public static List<Double> loadScores(String playerName) throws IOException {
         List<Score> scoreEntries = loadScores();
         List<Double> scores = new LinkedList<>();
-        for(Score scoreEntry : scoreEntries) {
+        for (Score scoreEntry : scoreEntries) {
             System.out.println(playerName + scoreEntry.getUsername());
-            if(scoreEntry.getUsername().equalsIgnoreCase(playerName)) {
-                scores.add(scoreEntry.getScore());
+            if (scoreEntry.getUsername().equalsIgnoreCase(playerName)) {
+                scores.add((double) scoreEntry.getScore());
             }
         }
         return scores;

@@ -1,17 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-<<<<<<< HEAD
-public class BlockedDirectionPoint extends Point {
-=======
 /**
  * Point avec des directions bloquées.
  * Cette classe étend la classe Point et ajoute la fonctionnalité de bloquer des directions.
  */
 public class BlockedDirectionPoint extends Point implements Serializable {
->>>>>>> refs/remotes/Morpion/dev/jaj
 	
     private static final long serialVersionUID = 1L;
 	private final Set<Direction> lockedDirections;

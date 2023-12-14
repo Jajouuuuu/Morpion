@@ -1,13 +1,5 @@
 package model;
 
-<<<<<<< HEAD
-public class Score {
-	
-    private String user;
-    private double score;
-    
-    public Score(String user, double score) {
-=======
 /**
  * La classe Score représente le score d'un joueur et est comparable avec d'autres scores.
  */
@@ -23,9 +15,8 @@ public class Score implements Comparable<Score> {
      * @param score    Le score à attribuer à l'utilisateur.
      */
     public Score(String user, int score) {
->>>>>>> refs/remotes/Morpion/dev/jaj
         this.score = score;
-        this.user = user;
+        this.username = user;
     }
 	
     /**
@@ -34,7 +25,7 @@ public class Score implements Comparable<Score> {
      * @return Le nom d'utilisateur associé à ce score.
      */
     public String getUsername() {
-        return user;
+        return username;
     }
 
     /**
@@ -45,9 +36,6 @@ public class Score implements Comparable<Score> {
     public double getScore() {
         return score;
     }
-<<<<<<< HEAD
-}
-=======
 
     /**
      * Compare ce score avec un autre score pour déterminer l'ordre de tri.
@@ -60,4 +48,3 @@ public class Score implements Comparable<Score> {
         return Integer.compare(this.score, other.score);
     }  
 }
->>>>>>> refs/remotes/Morpion/dev/jaj

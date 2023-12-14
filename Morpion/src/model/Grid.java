@@ -28,7 +28,7 @@ public class Grid implements Serializable {
 		this.grid = new BlockedDirectionPoint[width][height];
 		lines = new ArrayList<>();
 		points = new HashSet<>();
-		this.mode = mode;
+		this.setMode(mode);
 	}
 
 	/**
@@ -115,13 +115,13 @@ public class Grid implements Serializable {
 		}
 		ArrayList<Line> possibleLines = new ArrayList<>();
 		int numLocksAllowed = 0;
-		switch (mode) {
+		switch (getMode()) {
 		case FT -> numLocksAllowed = 1;
 		case FD -> numLocksAllowed = 0;
 		}
 		for (int i = -4; i <= 0; i++) {
 			Line line = new Line();
-			switch (mode) {
+			switch (getMode()) {
 			case FT -> numLocksAllowed = 1;
 			case FD -> numLocksAllowed = 0;
 			}
@@ -314,7 +314,7 @@ public class Grid implements Serializable {
      * @return Une copie de la grille.
      */
 	public Grid copy() {
-		Grid copy = new Grid(width(), height(), mode);
+		Grid copy = new Grid(width(), height(), getMode());
 		for (int i = 0; i < width(); i++) {
 			for (int j = 0; j < height(); j++) {
 				if (grid[i][j] == null) continue;
@@ -360,8 +360,6 @@ public class Grid implements Serializable {
 	public List<Line> getLines() {
 		return lines;
 	}
-<<<<<<< HEAD
-=======
 
 	/**
      * Renvoie le mode de jeu de la grille.
@@ -371,5 +369,4 @@ public class Grid implements Serializable {
 	public Mode getMode() {
 		return mode;
 	}
->>>>>>> refs/remotes/Morpion/dev/jaj
 }
