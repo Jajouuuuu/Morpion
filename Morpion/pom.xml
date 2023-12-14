@@ -26,6 +26,7 @@
         <configuration> 
             <outputDirectory>${project.build.directory}/javadoc</outputDirectory>
             <reportOutputDirectory>${project.reporting.outputDirectory}/javadoc</reportOutputDirectory>
+            <doclint>none</doclint>
         </configuration>
         <executions>
             <execution>
