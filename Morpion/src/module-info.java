@@ -7,10 +7,7 @@ module Morpion {
 		requires com.fasterxml.jackson.databind;
 		requires java.desktop;
 		requires com.opencsv;
-		requires junit;
-		
-		
-			
+	
 	    opens app to javafx.fxml;
 	    exports app;
 	    
@@ -22,4 +19,5 @@ module Morpion {
 	    
 	    opens controler to javafx.fxml;
 	    exports controler;
+	    
 	}
