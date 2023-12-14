@@ -5,7 +5,7 @@ module Morpion {
 	requires javafx.fxml;
 	requires javafx.controls;
 	requires junit;
-		
+	
     opens app to javafx.fxml;
     exports app;
     opens model to javafx.fxml;
