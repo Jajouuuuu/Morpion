@@ -33,7 +33,7 @@ public class Score implements Comparable<Score> {
      *
      * @return Le score.
      */
-    public double getScore() {
+    public int getScore() {
         return score;
     }
 
