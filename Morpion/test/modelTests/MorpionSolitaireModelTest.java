@@ -15,20 +15,20 @@ public class MorpionSolitaireModelTest {
         morpionSolitaireModel = new MorpionSolitaireModel();
     }
 
-	/*
-	 * @Test public void testInitialization() {
-	 * assertNotNull(morpionSolitaireModel);
-	 * assertFalse(morpionSolitaireModel.isGameOver());
-	 * assertNull(morpionSolitaireModel.getPlayerName()); }
-	 */
+    @Test 
+    public void testInitialization() {
+    	assertNotNull(morpionSolitaireModel);
+    	assertFalse(morpionSolitaireModel.isGameOver());
+    	assertEquals("DefaultPlayer", morpionSolitaireModel.getPlayerName()); 
+    }
 
-	/*
-	 * @Test public void testInit() { morpionSolitaireModel.init();
-	 * 
-	 * assertNotNull(morpionSolitaireModel);
-	 * assertFalse(morpionSolitaireModel.isGameOver());
-	 * assertNull(morpionSolitaireModel.getPlayerName()); }
-	 */
+    @Test 
+    public void testInit() { morpionSolitaireModel.init();
+    	assertNotNull(morpionSolitaireModel);
+    	assertFalse(morpionSolitaireModel.isGameOver());
+    	assertEquals("DefaultPlayer", morpionSolitaireModel.getPlayerName()); 
+    }
+    	
 
     @Test
     public void testHandleHumanMove() {
