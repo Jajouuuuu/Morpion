@@ -61,18 +61,25 @@ public class NmcsStateTest {
 		assertNotNull(nextState.getPossibleLines());
 	}
 
-	/*
-	 * @Test public void testSimulationToTheEnd() { Grid grid = new Grid(14, 14,
-	 * Mode.FD); grid.init(); NmcsState nmcsState = new NmcsState(grid);
-	 * 
-	 * // Mocking no possibleLines for simulation List<Line> mockPossibleLines = new
-	 * ArrayList<>(); mockPossibleLines.add(new Line());
-	 * nmcsState.setPossibleLines(mockPossibleLines);
-	 * 
-	 * nmcsState.simulationToTheEnd();
-	 * 
-	 * // Verify that the simulation results in a terminal position
-	 * assertTrue(nmcsState.isTerminalPosition()); assertEquals(grid.lines().size(),
-	 * nmcsState.getScore()); }
-	 */
+	
+	  @Test 
+	  public void testSimulationToTheEnd() { 
+		  Grid grid = new Grid(14, 14,
+		  Mode.FD); grid.init(); 
+		  NmcsState nmcsState = new NmcsState(grid);
+		  
+		  // Mocking no possibleLines for simulation 
+		  List<Line> mockPossibleLines = new
+		  ArrayList<>(); 
+		  mockPossibleLines.add(new Line());
+		  nmcsState.setPossibleLines(mockPossibleLines);
+		  
+		  nmcsState.simulationToTheEnd();
+		  
+		  // Verify that the simulation results in a terminal position
+		  assertTrue(nmcsState.isTerminalPosition()); 
+		  assertEquals(grid.lines().size(),
+		  nmcsState.getScore()); 
+	  }
+	 
 }
