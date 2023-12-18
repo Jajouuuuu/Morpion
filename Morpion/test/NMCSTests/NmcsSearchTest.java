@@ -11,7 +11,6 @@ import model.Mode;
 
 public class NmcsSearchTest {
 
-
 	@Test 
 	public void testSearchBestState() { 
 		Grid grid = new Grid(14, 14, Mode.FD); 

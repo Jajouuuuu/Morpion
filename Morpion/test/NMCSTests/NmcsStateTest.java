@@ -80,6 +80,5 @@ public class NmcsStateTest {
 		  assertTrue(nmcsState.isTerminalPosition()); 
 		  assertEquals(grid.lines().size(),
 		  nmcsState.getScore()); 
-	  }
-	 
+	  } 
 }
