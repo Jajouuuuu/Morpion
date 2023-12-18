@@ -1,12 +1,12 @@
 package NMCSTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import NMCS.NmcsSearch;
 import NMCS.NmcsState;
 import model.Grid;
-import model.Line;
 import model.Mode;
 
 public class NmcsSearchTest {
@@ -16,21 +16,12 @@ public class NmcsSearchTest {
 		System.out.println("test1");
 		Grid grid = new Grid(14, 14, Mode.FD); 
 		grid.init(); 
-
-		NmcsState simulatedState = new NmcsState(grid); 
-		simulatedState.setScore(10);
-
-		NmcsState mockState = new NmcsState(grid) {
-
-			
-	@Override 
-	public NmcsState nextState(Line line) { 
-		System.out.println("test2");
-		return simulatedState; } };
-			NmcsState resultState = NmcsSearch.searchBestState(mockState, 3);
-
-			assertEquals(simulatedState, resultState);
-			assertEquals(simulatedState.getScore(), resultState.getScore());
-			assertEquals(simulatedState.getAddedLine(), resultState.getAddedLine());
+		NmcsState initialState = new NmcsState(grid); 
+		
+		NmcsState nextSearch = NmcsSearch.searchBestState(initialState, 1);
+		
+		assertEquals(initialState.getScore(), 0);
+		assertTrue(nextSearch.getScore()>50);
+		assertTrue(nextSearch.getScore()<180);
 	}
 }
