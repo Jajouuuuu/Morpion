@@ -57,8 +57,6 @@ Pas de nom de joueur !,21.0
 Pas de nom de joueur !,57.0
 Pas de nom de joueur !,61.0
 Pas de nom de joueur !,48.0
-<<<<<<< HEAD
-=======
 Pas de nom de joueur !,33.0
 Pas de nom de joueur !,63.0
 Pas de nom de joueur !,61.0
@@ -103,7 +101,6 @@ Jajou,57.0
 Jajou,57.0
 Jajou,64.0
 Jajou,84.0
->>>>>>> refs/remotes/Morpion/dev/jaj
 DefaultPlayer,59.0
 DefaultPlayer,56.0
 DefaultPlayer,59.0
@@ -151,3 +148,5 @@ DefaultPlayer,26.0
 DefaultPlayer,42.0
 DefaultPlayer,55.0
 Paul,26.0
+DefaultPlayer,61.0
+DefaultPlayer,34.0
