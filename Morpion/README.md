@@ -4,7 +4,7 @@
 Le projet Morpion Solitaire est un jeu développé en Java 17 avec JavaFX  par Jeanne-Emma Lefèvre et Paul Malet. Le jeu implémente les règles du Morpion Solitaire où un seul joueur est nécessaire. Les règles sont simples, et l'objectif est d'obtenir le score maximal en ajoutant des croix sur une grille.
 
 ## Installation
-Assurez-vous d'avoir Maven installé sur votre système. Pour exécuter le projet, utilisez la commande suivante à la racine du projet :
+Assurez-vous d'avoir Maven installé sur votre système. Pour exécuter le projet, utilisez la commande suivante à la racine du projet (dans le dossier nommé Morpion) :
 
 ```bash
 mvn clean install javafx:run
