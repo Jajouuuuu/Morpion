@@ -15,7 +15,6 @@ public class NmcsStateTest {
 
 	@Test
 	public void testInitialState() {
-
 		Grid grid = new Grid(14, 14, Mode.FD);
 		grid.init();
 		NmcsState nmcsState = new NmcsState(grid);
@@ -69,8 +68,7 @@ public class NmcsStateTest {
 		  NmcsState nmcsState = new NmcsState(grid);
 		  
 		  // Mocking no possibleLines for simulation 
-		  List<Line> mockPossibleLines = new
-		  ArrayList<>(); 
+		  List<Line> mockPossibleLines = new ArrayList<>(); 
 		  mockPossibleLines.add(new Line());
 		  nmcsState.setPossibleLines(mockPossibleLines);
 		  

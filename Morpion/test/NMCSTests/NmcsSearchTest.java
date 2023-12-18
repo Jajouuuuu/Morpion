@@ -13,6 +13,7 @@ public class NmcsSearchTest {
 
 	@Test 
 	public void testSearchBestState() { 
+		System.out.println("test1");
 		Grid grid = new Grid(14, 14, Mode.FD); 
 		grid.init(); 
 
@@ -24,6 +25,7 @@ public class NmcsSearchTest {
 			
 	@Override 
 	public NmcsState nextState(Line line) { 
+		System.out.println("test2");
 		return simulatedState; } };
 			NmcsState resultState = NmcsSearch.searchBestState(mockState, 3);
 
