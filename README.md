@@ -1,5 +1,13 @@
 # Morpion Solitaire
 
+
+
+
+https://github.com/Jajouuuuu/Morpion/assets/82720953/88b13f5c-77ef-45bc-9f0f-4096cc0b67df
+
+
+
+
 ## Description
 Le projet Morpion Solitaire est un jeu développé en Java 17 avec JavaFX  par Jeanne-Emma Lefèvre et Paul Malet. Le jeu implémente les règles du Morpion Solitaire où un seul joueur est nécessaire. Les règles sont simples, et l'objectif est d'obtenir le score maximal en ajoutant des croix sur une grille.
 
